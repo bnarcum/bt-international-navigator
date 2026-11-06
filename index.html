@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BT International Navigator</title>
+  <meta name="description" content="Unofficial explorer for how BT International products relate to each other and to Cisco.">
+  <link rel="stylesheet" href="assets/bt-ui.css?v=0.1.0">
+  <link rel="stylesheet" href="assets/bt-chrome.css?v=0.1.0">
+  <link rel="stylesheet" href="assets/bt-solutions.css?v=0.1.0">
+</head>
+<body class="seller view-graph">
+  <header id="app-chrome">
+    <div id="topbar">
+      <button type="button" class="wordmark" id="home-btn" aria-label="BT International Navigator home">
+        <span class="wm-mark">BT</span>
+        <span class="wm-prod">International Navigator</span>
+      </button>
+      <nav class="site-nav" aria-label="Primary">
+        <button type="button" id="map-btn" class="nav-link">See how it connects</button>
+        <button type="button" id="outcomes-btn" class="nav-link">Outcomes</button>
+      </nav>
+      <div class="sw">
+        <input id="search" type="search" placeholder="Global Fabric, SASE, Webex…" autocomplete="off" spellcheck="false">
+        <div id="sr" role="listbox"></div>
+      </div>
+    </div>
+  </header>
+
+  <main id="seller"></main>
+
+  <div id="gw">
+    <div id="canvas">
+      <div class="canvas-glow" aria-hidden="true"></div>
+      <svg id="gs" class="graph-active" aria-hidden="true"></svg>
+      <div id="canvas-ui">
+        <p class="canvas-hint" id="canvas-hint">Pick a domain on the right — or click a token.</p>
+        <div id="oem-lens" class="oem-lens" aria-label="Cisco lens"></div>
+        <div id="ppills" class="legend" aria-label="Domain colors"></div>
+      </div>
+    </div>
+    <aside id="hood" aria-label="Connection story"></aside>
+    <div id="overview-root" class="stage" hidden></div>
+    <div id="practice-root" class="stage stage-scroll" hidden></div>
+    <div id="article-root" class="stage stage-scroll" hidden></div>
+  </div>
+
+  <div id="tip" role="tooltip">
+    <div class="tip-name" id="tip-name"></div>
+    <div class="tip-desc" id="tip-desc"></div>
+  </div>
+
+  <div id="panel-backdrop" aria-hidden="true"></div>
+  <div id="panel">
+    <button id="pcl" aria-label="Close">×</button>
+    <div id="phead"></div>
+    <div id="pbody"></div>
+  </div>
+
+  <div id="solutions-ov" aria-hidden="true" role="dialog" aria-labelledby="sol-panel-title">
+    <div id="solutions-panel">
+      <div class="sol-head">
+        <div class="sol-head-row">
+          <div>
+            <h2 id="sol-panel-title">Outcomes</h2>
+            <p class="sol-sub">Start with the business result. Then see the stack that gets there.</p>
+          </div>
+          <button type="button" class="sol-close" id="sol-close-btn" aria-label="Close">×</button>
+        </div>
+      </div>
+      <div class="sol-body">
+        <div class="sol-catalog on">
+          <div class="sol-toolbar">
+            <input type="search" class="sol-search" id="sol-search" placeholder="Search outcomes…" autocomplete="off">
+            <div id="sol-filter-chips">
+              <button type="button" class="sol-fchip on" data-filter="all">All</button>
+              <button type="button" class="sol-fchip" data-filter="connectivity">Connect</button>
+              <button type="button" class="sol-fchip" data-filter="collaboration">Collab</button>
+              <button type="button" class="sol-fchip" data-filter="managed">Operate</button>
+            </div>
+          </div>
+          <div class="outcome-grid" id="sol-outcome-grid"></div>
+        </div>
+        <div class="sol-detail">
+          <div id="sol-detail-root"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="solution-lens-bar" aria-live="polite">
+    <span class="sl-title" id="sl-title">Outcome lens</span>
+    <button type="button" id="sl-reopen">Details</button>
+    <button type="button" id="sl-clear" class="sl-primary">Clear</button>
+  </div>
+
+  <div id="status-bar" role="alert"></div>
+
+  <script>
+    (function () {
+      function showErr(msg) {
+        var bar = document.getElementById("status-bar");
+        if (bar) { bar.textContent = msg; bar.classList.add("show"); }
+      }
+      if (location.protocol === "file:") {
+        showErr("Use python3 -m http.server 8765 and open http://localhost:8765/");
+      }
+      window.addEventListener("error", function (e) {
+        if (e.message) showErr("Load error: " + e.message);
+      });
+      setTimeout(function () {
+        if (!window.__bin && location.protocol !== "file:") {
+          showErr("App failed to load — hard-refresh (Cmd+Shift+R).");
+        }
+      }, 4000);
+    })();
+  </script>
+  <script src="vendor/d3.min.js"></script>
+  <script type="module" src="assets/app.js?v=0.1.0"></script>
+</body>
+</html>

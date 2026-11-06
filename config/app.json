@@ -1,0 +1,71 @@
+{
+  "name": "BT International Navigator",
+  "version": "0.1.0",
+  "description": "Unofficial explorer for how BT International products relate to each other and to Cisco.",
+  "disclaimer": "Unofficial demo summarized from public pages on international.bt.com and cisco.com. Not affiliated with BT Group or Cisco.",
+  "tagline": "How the products connect",
+  "pillars": [
+    {
+      "id": "connectivity",
+      "name": "Secure Connectivity",
+      "eyebrow": "Network",
+      "desc": "Global Fabric, dedicated internet, SD-WAN, and SASE as one connectivity story.",
+      "story": "Offices, clouds, and users share one network. Access, SD-WAN, and SSE sit on Global Fabric instead of as separate estates."
+    },
+    {
+      "id": "collaboration",
+      "name": "Voice, Collaboration & CX",
+      "eyebrow": "People",
+      "desc": "Global Voice, Webex, and UC Edge — calling, meetings, and the voice layer under them.",
+      "story": "Calling, meetings, and contact sit on Global Voice. Webex is one of the collaboration stacks that layer rides."
+    },
+    {
+      "id": "managed",
+      "name": "Managed Services",
+      "eyebrow": "Operate",
+      "desc": "Ops Fabric — observability, automation, and the operating wrap across network, voice, and security.",
+      "story": "The platforms only hold if someone runs them. Ops Fabric is the operating model across connectivity, voice, and security."
+    }
+  ],
+  "portfolios": [
+    {
+      "id": "connectivity",
+      "name": "Secure Connectivity",
+      "line": "Global Fabric, dedicated internet, SD-WAN, and SASE.",
+      "aliases": ["global fabric", "dia", "icr", "sd-wan", "sase", "sse", "internet"],
+      "families": ["global-fabric", "dia", "icr", "sdwan", "sase"]
+    },
+    {
+      "id": "collaboration",
+      "name": "Voice, Collaboration & CX",
+      "line": "Global Voice, Webex, One Cloud Cisco, and UC Edge.",
+      "aliases": ["webex", "calling", "meetings", "uc edge", "voice", "collaboration"],
+      "families": ["global-voice", "webex-calling", "webex-meetings", "one-cloud-cisco", "cisco-collaboration", "uc-edge"]
+    },
+    {
+      "id": "managed",
+      "name": "Managed Services",
+      "line": "Ops Fabric — the operating wrap across network, voice, and security.",
+      "aliases": ["ops fabric", "managed", "operations", "noc"],
+      "families": ["ops-fabric"]
+    }
+  ],
+  "categories": [
+    "connectivity",
+    "collaboration",
+    "managed"
+  ],
+  "useCases": [
+    "Global connectivity",
+    "SASE / SSE",
+    "SD-WAN",
+    "Cloud calling",
+    "Hybrid work",
+    "Managed operations"
+  ],
+  "links": {
+    "portfolioNavigator": "https://bnarcum.github.io/cisco-portfolio-navigator/",
+    "btCisco": "https://international.bt.com/partners/cisco",
+    "btHome": "https://international.bt.com/"
+  }
+}

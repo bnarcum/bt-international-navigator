@@ -1,0 +1,11 @@
+{
+  "name": "bt-international-navigator",
+  "private": true,
+  "type": "module",
+  "version": "0.1.0",
+  "description": "Unofficial explorer for BT International products, how they relate, and the Cisco families they use.",
+  "scripts": {
+    "test": "node scripts/test-data.mjs",
+    "test:data": "node scripts/test-data.mjs"
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "outcomes": [
+    {
+      "id": "connect-globally",
+      "pillar": "connectivity",
+      "symptom": "Every region is a different network, a different ISP, and a months-long provision.",
+      "outcome": "Connect offices, clouds, and partners on one Global Fabric.",
+      "proof": {
+        "metric": "Time to stand up a new site or cloud path",
+        "before": "Separate circuits, contracts, and operating models per region",
+        "after": "On-demand NaaS, DIA, and ICR under one BT relationship"
+      },
+      "useCases": ["Global connectivity", "SD-WAN"],
+      "solutions": ["global-fabric", "dia"],
+      "families": ["global-fabric", "dia", "icr", "sdwan"]
+    },
+    {
+      "id": "secure-access-anywhere",
+      "pillar": "connectivity",
+      "symptom": "Users, branches, and SaaS no longer live on one network — VPN and a perimeter firewall do not.",
+      "outcome": "Secure access from anywhere — SASE with a chosen SSE on Global Fabric.",
+      "proof": {
+        "metric": "Path from user to inspection to application",
+        "before": "Hairpinned internet into a single vendor SSE",
+        "after": "SD-WAN plus Cisco, Fortinet, Netskope, or Zscaler, peered on Global Fabric"
+      },
+      "useCases": ["SASE / SSE", "SD-WAN"],
+      "solutions": ["sdwan-sase", "global-fabric"],
+      "families": ["sase", "sdwan", "global-fabric"]
+    },
+    {
+      "id": "collaborate-globally",
+      "pillar": "collaboration",
+      "symptom": "Calling, meetings, and numbers are three estates — and a fourth when the UC platform changes.",
+      "outcome": "One voice layer under Webex, with room to mix Teams or Zoom.",
+      "proof": {
+        "metric": "Moving users between collaboration platforms",
+        "before": "Number ports, downtime, and a new voice contract",
+        "after": "Global Voice and UC Edge; Webex Calling or One Cloud Cisco on top"
+      },
+      "useCases": ["Cloud calling", "Hybrid work"],
+      "solutions": ["global-voice", "cisco-collab"],
+      "families": ["global-voice", "uc-edge", "webex-calling", "webex-meetings", "one-cloud-cisco", "cisco-collaboration"]
+    },
+    {
+      "id": "operate-the-estate",
+      "pillar": "managed",
+      "symptom": "Network, voice, and security each have a toolset and a ticket queue.",
+      "outcome": "One operating model — Ops Fabric across connectivity, voice, and security.",
+      "proof": {
+        "metric": "How operations sees the estate",
+        "before": "Separate NOCs and no shared automation",
+        "after": "Observability, AI, and domain experts on Ops Fabric"
+      },
+      "useCases": ["Managed operations"],
+      "solutions": ["ops-fabric"],
+      "families": ["ops-fabric", "global-fabric", "global-voice", "sase"]
+    }
+  ]
+}

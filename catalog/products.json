@@ -1,0 +1,54 @@
+{
+  "products": [
+    {
+      "id": "sdwan",
+      "oem": "cisco",
+      "group": "networking",
+      "name": "Cisco SD-WAN",
+      "why": "The Cisco overlay BT runs as managed SD-WAN — branches, cloud, and DIA on one fabric, and the WAN half of SASE.",
+      "url": "https://www.cisco.com/c/en/us/solutions/enterprise-networks/sd-wan/index.html",
+      "families": ["sdwan", "sase"],
+      "offerings": ["sdwan-sase"]
+    },
+    {
+      "id": "secure-access",
+      "oem": "cisco",
+      "group": "security",
+      "name": "Cisco Secure Access",
+      "why": "Cisco’s SSE. Global Fabric peers into it as one of four SSE choices (Cisco, Fortinet, Netskope, Zscaler).",
+      "url": "https://www.cisco.com/site/us/en/products/security/secure-access/index.html",
+      "families": ["sase", "global-fabric"],
+      "offerings": ["sdwan-sase", "global-fabric"]
+    },
+    {
+      "id": "webex-calling",
+      "oem": "cisco",
+      "group": "workplace",
+      "name": "Webex Calling",
+      "why": "Cloud calling BT sells as Webex Calling and as One Cloud Cisco (hosted in BT data centres).",
+      "url": "https://www.webex.com/products/calling.html",
+      "families": ["webex-calling", "one-cloud-cisco", "cisco-collaboration"],
+      "offerings": ["cisco-collab", "global-voice"]
+    },
+    {
+      "id": "webex-meetings",
+      "oem": "cisco",
+      "group": "workplace",
+      "name": "Webex Meetings",
+      "why": "Meetings half of the Cisco collaboration suite on the BT cloud collaboration page.",
+      "url": "https://www.webex.com/products/meetings.html",
+      "families": ["webex-meetings", "cisco-collaboration"],
+      "offerings": ["cisco-collab"]
+    },
+    {
+      "id": "webex-app",
+      "oem": "cisco",
+      "group": "workplace",
+      "name": "Webex",
+      "why": "One of the UC platforms UC Edge routes onto GSIP, alongside Teams and Zoom.",
+      "url": "https://www.webex.com/",
+      "families": ["uc-edge", "cisco-collaboration"],
+      "offerings": ["cisco-collab", "global-voice"]
+    }
+  ]
+}

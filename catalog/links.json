@@ -1,0 +1,24 @@
+{
+  "links": [
+    { "source": "dia", "target": "global-fabric", "type": "direct", "label": "Business Internet" },
+    { "source": "icr", "target": "dia", "type": "direct", "label": "Partner DIA" },
+    { "source": "icr", "target": "global-fabric", "type": "adjacent", "label": "Reach" },
+    { "source": "dia", "target": "sdwan", "type": "adjacent", "label": "SD-WAN underlay" },
+    { "source": "sdwan", "target": "global-fabric", "type": "direct", "label": "NaaS underlay" },
+    { "source": "sdwan", "target": "sase", "type": "direct", "label": "Convergence" },
+    { "source": "sase", "target": "global-fabric", "type": "direct", "label": "SSE peering" },
+    { "source": "global-fabric", "target": "global-voice", "type": "adjacent", "label": "Voice path" },
+    { "source": "global-voice", "target": "webex-calling", "type": "direct", "label": "Cloud calling" },
+    { "source": "global-voice", "target": "uc-edge", "type": "direct", "label": "UC routing" },
+    { "source": "uc-edge", "target": "webex-calling", "type": "direct", "label": "Webex path" },
+    { "source": "webex-calling", "target": "one-cloud-cisco", "type": "direct", "label": "Hosted Cisco" },
+    { "source": "one-cloud-cisco", "target": "cisco-collaboration", "type": "direct", "label": "Cisco stack" },
+    { "source": "cisco-collaboration", "target": "webex-meetings", "type": "direct", "label": "Meetings" },
+    { "source": "webex-calling", "target": "webex-meetings", "type": "adjacent", "label": "Same suite" },
+    { "source": "uc-edge", "target": "cisco-collaboration", "type": "adjacent", "label": "Cisco UC" },
+    { "source": "sase", "target": "uc-edge", "type": "adjacent", "label": "Secure access" },
+    { "source": "ops-fabric", "target": "global-fabric", "type": "direct", "label": "Operate network" },
+    { "source": "ops-fabric", "target": "global-voice", "type": "direct", "label": "Operate voice" },
+    { "source": "ops-fabric", "target": "sase", "type": "adjacent", "label": "Operate security" }
+  ]
+}

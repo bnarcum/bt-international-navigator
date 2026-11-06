@@ -1,0 +1,26 @@
+{
+  "oems": [
+    {
+      "id": "cisco",
+      "name": "Cisco",
+      "lede": "Cisco families BT International publicly sells or integrates — SD-WAN, Secure Access, and Webex. Pick a family, then see where it lands on the BT map.",
+      "portfolio": [
+        {
+          "id": "networking",
+          "name": "Networking",
+          "desc": "Managed SD-WAN on Global Fabric."
+        },
+        {
+          "id": "security",
+          "name": "Security",
+          "desc": "Cisco Secure Access as one SSE choice on Global Fabric."
+        },
+        {
+          "id": "workplace",
+          "name": "Collaboration",
+          "desc": "Webex calling, meetings, and the UC Edge path into GSIP."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "solutions": [
+    {
+      "id": "global-fabric",
+      "name": "Global Fabric",
+      "category": "connectivity",
+      "pillar": "connectivity",
+      "desc": "Instant multi-service, multi-cloud Network-as-a-Service for sites, clouds, apps, and partners.",
+      "lede": "One NaaS platform instead of a different network in every region.",
+      "why": "Expand, multi-cloud, and AI workloads need connectivity that provisions on demand and peers into SSE clouds.",
+      "useCases": ["Global connectivity", "SASE / SSE", "SD-WAN"],
+      "capabilities": ["On-demand connectivity", "Multi-cloud", "SSE peering"],
+      "url": "https://international.bt.com/platforms/global-fabric",
+      "families": ["global-fabric", "dia", "sdwan", "sase"]
+    },
+    {
+      "id": "dia",
+      "name": "Direct Internet Access",
+      "category": "connectivity",
+      "pillar": "connectivity",
+      "desc": "Dedicated internet, Global Fabric Business Internet, and Internet Connect Reach.",
+      "lede": "Uncontended access for cloud, voice, and the WAN overlay.",
+      "why": "SaaS, collaboration, and SD-WAN need a dedicated path, including markets beyond BT PoPs.",
+      "useCases": ["Global connectivity", "SD-WAN", "Hybrid work"],
+      "capabilities": ["Dedicated DIA", "Partner reach (ICR)", "SD-WAN underlay"],
+      "url": "https://international.bt.com/products-services/secure-connectivity/direct-internet-access",
+      "families": ["dia", "icr", "global-fabric"]
+    },
+    {
+      "id": "sdwan-sase",
+      "name": "Managed SD-WAN and SASE",
+      "category": "connectivity",
+      "pillar": "connectivity",
+      "desc": "Managed SD-WAN plus SSE from Cisco, Fortinet, Netskope, or Zscaler.",
+      "lede": "The WAN overlay and the security edge as one managed SASE service.",
+      "why": "Branches, users, and SaaS need one overlay and a chosen SSE, peered through Global Fabric.",
+      "useCases": ["SD-WAN", "SASE / SSE"],
+      "capabilities": ["Multi-vendor SD-WAN", "Choice of SSE", "Global Fabric peering"],
+      "url": "https://international.bt.com/products-services/secure-connectivity/software-defined-networking",
+      "families": ["sdwan", "sase", "global-fabric"]
+    },
+    {
+      "id": "global-voice",
+      "name": "Global Voice",
+      "category": "collaboration",
+      "pillar": "collaboration",
+      "desc": "Global SIP, inbound contact, and UC Edge on one voice platform.",
+      "lede": "Carrier voice under Webex, Teams, Zoom, and contact centre.",
+      "why": "International calling and UC migration fail when every country is a different voice estate.",
+      "useCases": ["Cloud calling", "Hybrid work"],
+      "capabilities": ["Global SIP", "Inbound contact", "UC Edge routing"],
+      "url": "https://international.bt.com/platforms/global-voice",
+      "families": ["global-voice", "uc-edge", "webex-calling"]
+    },
+    {
+      "id": "cisco-collab",
+      "name": "Cisco collaboration",
+      "category": "collaboration",
+      "pillar": "collaboration",
+      "desc": "Webex Calling, Webex Meetings, One Cloud Cisco, and the Cisco Collaboration proposition.",
+      "lede": "Cisco calling and meetings, in Cisco’s cloud or hosted by BT.",
+      "why": "Customers who standardised on Cisco need a global voice layer and a hosted option, not another stack.",
+      "useCases": ["Cloud calling", "Hybrid work"],
+      "capabilities": ["Webex Calling", "Webex Meetings", "BT-hosted Cisco"],
+      "url": "https://international.bt.com/products-services/voice-collaboration-CX/cloud-collaboration-tools",
+      "families": ["webex-calling", "webex-meetings", "one-cloud-cisco", "cisco-collaboration", "uc-edge"]
+    },
+    {
+      "id": "ops-fabric",
+      "name": "Ops Fabric",
+      "category": "managed",
+      "pillar": "managed",
+      "desc": "AI-powered managed operations across connectivity, overlay, security, voice, and digital experience.",
+      "lede": "One operating model for the platforms you just connected.",
+      "why": "Global Fabric, Global Voice, and SASE still need observability, automation, and experts.",
+      "useCases": ["Managed operations", "Global connectivity"],
+      "capabilities": ["Observability", "Automation", "Domain experts"],
+      "url": "https://international.bt.com/platforms/ops-fabric",
+      "families": ["ops-fabric", "global-fabric", "global-voice", "sase"]
+    }
+  ]
+}
