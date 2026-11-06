@@ -221,6 +221,7 @@ export function renderEdge(e, practiceNameFn, markFn, focus) {
   if (!left || !right) return "";
   const dest = walkDest(e, focus) || right;
   const cross = left.pillar !== right.pillar;
+  const gap = e.type === "gap" || dest.gap;
   const mark = markFn || (() => "");
   const fromPractice =
     focus.kind === "family"
@@ -231,7 +232,7 @@ export function renderEdge(e, practiceNameFn, markFn, focus) {
         ? focus.id
         : left.pillar;
   return `
-    <button type="button" class="walk-step${cross ? " cross" : ""}" data-kind="family" data-id="${dest.id}">
+    <button type="button" class="walk-step${cross ? " cross" : ""}${gap ? " gap" : ""}" data-kind="family" data-id="${dest.id}">
       <span class="ws-because">${e.label || "connects"}</span>
       <span class="ws-pair">
         <span class="ws-end">${mark(dest.pillar)}${dest.name}</span>

@@ -1,4 +1,4 @@
-import { createGraph } from "./graph.js?v=0.2.8";
+import { createGraph } from "./graph.js?v=0.2.9";
 import { createPanel } from "./panel.js";
 import { createSolutionsApi } from "./solutions.js";
 import { createSolutionsUI } from "./solutions-ui.js";
@@ -14,7 +14,7 @@ import {
   oemProductsOn,
   productsOn,
   renderEdge,
-} from "./hood.js?v=0.14.3";
+} from "./hood.js?v=0.2.9";
 import { markSvg } from "./marks.js";
 
 const BUILD = "0.1.0";
@@ -398,10 +398,10 @@ function canvasHint() {
       : "Pick a domain on the right — or click a token.";
   }
   if (kind === "practice") return `You are in ${pn(id)}. Open a product next.`;
-  if (kind === "family") return state.oemFilter ? "Cisco families for this product are below. Walk a bridge next." : "Next step is on the right. Hover a walk to light it on the map.";
-  if (kind === "solution") return "Open a capability to walk the stack.";
-  if (kind === "outcome") return "Pick an offering or a capability to continue.";
-  if (kind === "product") return "Open a capability chip — or click its token on the map.";
+  if (kind === "family") return "Next step is on the right. Hover a walk to light it on the map.";
+  if (kind === "solution") return "Open a product to walk the stack.";
+  if (kind === "outcome") return "Pick an offering to continue.";
+  if (kind === "product") return "Open a product on the right — or click its token on the map.";
   return "Click a token — or continue in the panel.";
 }
 
@@ -428,14 +428,34 @@ function renderTrail() {
   </nav>`;
 }
 
-function youAre(kicker, title, lede, pillar) {
+function youAre(title, lede, pillar) {
   return `
     <div class="you-are">
       ${pillar ? `<div class="ya-mark m-${esc(pillar)}">${mark(pillar, 28)}</div>` : ""}
-      <p class="hood-kicker">${esc(kicker)}</p>
       <h1>${esc(title)}</h1>
       ${lede ? `<p class="hood-lede">${esc(lede)}</p>` : ""}
     </div>`;
+}
+
+function outLink(url, label) {
+  if (!url) return "";
+  return `<a class="text-link hood-out" href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(label || "Open")}</a>`;
+}
+
+function familyDetail(family) {
+  const seller = family.seller || {};
+  const parts = seller.parts || [];
+  const proof = seller.proof || [];
+  const includes = parts.length
+    ? `<p class="hood-kicker part-k">Includes</p><ul class="part-list">${parts.map((p) => `<li>${esc(p)}</li>`).join("")}</ul>`
+    : "";
+  const stats = proof.length
+    ? `<ul class="proof-stats">${proof.map((p) => `<li><b>${esc(p.n)}</b><span>${esc(p.l)}</span></li>`).join("")}</ul>`
+    : "";
+  return `
+    ${seller.fits ? `<p class="hood-lede hood-fits">${esc(seller.fits)}</p>` : ""}
+    ${includes}
+    ${stats}`;
 }
 
 function walks(edges, extra = {}) {
@@ -581,13 +601,13 @@ function renderHood() {
     } else {
       lens = h.neighborIds;
       selected = h.family.id;
+      const seller = h.family.seller || {};
       html = `
         ${renderTrail()}
-        ${youAre(`You are in ${pn(h.family.pillar)}`, h.family.name, h.family.desc, h.family.pillar)}
+        ${youAre(h.family.name, seller.sentence || h.family.desc, h.family.pillar)}
+        ${familyDetail(h.family)}
         ${section("Next step", walks(nextWalks(h)))}
-        ${productSection(visibleProducts(h.products), state.oemFilter ? `${oemName(state.oemFilter)} here` : "Cisco families on this product")}
-        ${section("Used in", `<div class="hood-list compact">${h.offerings.map((s) => btn("solution", s.id, s.name, s.lede, s.pillar)).join("") || "<p class='empty'>None tagged in this snapshot.</p>"}</div>`)}
-        ${h.labs.length ? section("On BT International", h.labs.map(resourceRow).join("")) : ""}`;
+        ${outLink(seller.next?.url, seller.next?.label)}`;
     }
   } else if (kind === "solution") {
     const h = hoodForSolution(state, id);
@@ -599,11 +619,9 @@ function renderHood() {
       selected = (h.fams[0] && h.fams[0].id) || "";
       html = `
         ${renderTrail()}
-        ${youAre(`Offering · ${pn(h.solution.pillar)}`, h.solution.name, h.solution.lede || h.solution.desc, h.solution.pillar)}
-        <a class="text-link" href="${esc(h.solution.url)}" target="_blank" rel="noopener noreferrer">Open on BT International</a>
-        ${section("Capabilities in this offering", `<div class="hood-list">${h.fams.map((f) => btn("family", f.id, f.name, f.desc, f.pillar)).join("")}</div>`)}
-        ${productSection(visibleProducts(h.products), "Products in this offering")}
-        ${h.outcomes.length ? section("Results it serves", `<div class="hood-list compact">${h.outcomes.map((o) => btn("outcome", o.id, o.outcome, o.symptom, o.pillar)).join("")}</div>`) : ""}`;
+        ${youAre(h.solution.name, h.solution.why || h.solution.lede || h.solution.desc, h.solution.pillar)}
+        ${section("Next step", `<div class="hood-list">${h.fams.map((f) => btn("family", f.id, f.name, f.seller?.sentence || f.desc, f.pillar)).join("")}</div>`)}
+        ${outLink(h.solution.url, "Open on BT International")}`;
     }
   } else if (kind === "outcome") {
     const h = hoodForOutcome(state, id);
@@ -616,14 +634,13 @@ function renderHood() {
       const o = h.outcome;
       html = `
         ${renderTrail()}
-        ${youAre(`Result · ${pn(o.pillar)}`, o.outcome, o.symptom, o.pillar)}
+        ${youAre(o.outcome, o.symptom, o.pillar)}
         ${
           o.proof
             ? `<div class="proof-line"><div><em>Before</em>${esc(o.proof.before)}</div><span class="arrow">→</span><div><em>After</em>${esc(o.proof.after)}</div></div>`
             : ""
         }
-        ${section("Next: an offering that gets there", `<div class="hood-list">${h.offerings.map((s) => btn("solution", s.id, s.name, s.lede, s.pillar)).join("")}</div>`)}
-        ${section("Or a capability on the map", `<div class="hood-list compact">${h.fams.map((f) => btn("family", f.id, f.name, pn(f.pillar), f.pillar)).join("")}</div>`)}`;
+        ${section("Next step", `<div class="hood-list">${h.offerings.map((s) => btn("solution", s.id, s.name, s.lede, s.pillar)).join("")}</div>`)}`;
     }
   } else if (kind === "practice") {
     const h = hoodForPractice(state, id);
@@ -634,11 +651,8 @@ function renderHood() {
       lens = h.neighborIds;
       html = `
         ${renderTrail()}
-        ${youAre("You are in this domain", h.practice.name, h.practice.story || h.practice.desc, h.practice.id)}
-        ${section("Next: pick a product", `<div class="hood-list">${h.fams.map((f) => btn("family", f.id, f.name, f.desc, f.pillar)).join("")}</div>`)}
-        ${h.cross.length ? section("Or leave this domain", walks(h.cross.slice(0, 4))) : ""}
-        ${productSection(visibleProducts(h.products), state.oemFilter ? `${oemName(state.oemFilter)} in ${h.practice.name}` : "Cisco families in this domain")}
-        ${h.offerings.length ? section("Offerings", `<div class="hood-list compact">${h.offerings.map((s) => btn("solution", s.id, s.name, s.lede, s.pillar)).join("")}</div>`) : ""}`;
+        ${youAre(h.practice.name, h.practice.story || h.practice.desc, h.practice.id)}
+        ${section("Next step", `<div class="hood-list">${h.fams.map((f) => btn("family", f.id, f.name, f.seller?.sentence || f.desc, f.pillar)).join("")}</div>`)}`;
     }
   } else if (kind === "product") {
     const h = hoodForProduct(state, id);
@@ -648,17 +662,12 @@ function renderHood() {
     } else {
       lens = h.neighborIds;
       selected = (h.fams[0] && h.fams[0].id) || "";
-      const group = oemById(state, h.product.oem)?.portfolio?.find((g) => g.id === h.product.group);
       html = `
         ${renderTrail()}
-        ${youAre(group ? `${oemName(h.product.oem)} · ${group.name}` : `${oemName(h.product.oem)} · Product`, h.product.name, h.product.why, h.fams[0]?.pillar || "")}
-        <div class="product-links">
-          <a class="text-link" href="${esc(h.product.url)}" target="_blank" rel="noopener noreferrer">${h.product.url.includes("international.bt.com") ? "Open on BT International" : "View Cisco family"}</a>
-          <a class="text-link secondary" href="${esc(pnFamilyUrl(h.product.id))}" target="_blank" rel="noopener noreferrer">Open in Portfolio Navigator</a>
-        </div>
-        ${section("On the connection map", familyChips(h.fams.map((f) => f.id)))}
+        ${youAre(h.product.name, h.product.why, h.fams[0]?.pillar || "")}
+        ${section("Next step", `<div class="hood-list">${h.fams.map((f) => btn("family", f.id, f.name, f.seller?.sentence || f.desc, f.pillar)).join("")}</div>`)}
         ${skuSection(h.skus)}
-        ${h.offerings.length ? section("BT offerings", `<div class="hood-list compact">${h.offerings.map((s) => btn("solution", s.id, s.name, s.lede, s.pillar)).join("")}</div>`) : ""}`;
+        ${outLink(h.product.url, h.product.url.includes("international.bt.com") ? "Open on BT International" : "View on Cisco")}`;
     }
   }
 

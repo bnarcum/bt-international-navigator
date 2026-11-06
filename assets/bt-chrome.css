@@ -530,7 +530,11 @@ body.view-graph #gw {
 }
 
 .walk-step.cross { border-color: rgba(41, 151, 255, 0.3); }
+.walk-step.gap { border-style: dashed; border-color: #c4b5fd; }
+.walk-step.gap .ws-because,
+.walk-step.gap .ws-go { color: #c4b5fd; }
 .walk-step:hover { border-color: #2997ff; }
+.walk-step.gap:hover { border-color: #e9d5ff; }
 .ws-because {
   font-size: 11px;
   letter-spacing: 0.04em;
@@ -573,6 +577,10 @@ body.view-graph #gw {
 .proof-line em { display: block; font-style: normal; font-size: 10px; letter-spacing: 0.06em; text-transform: uppercase; color: #6e6e73; margin-bottom: 4px; }
 .proof-line .arrow { color: #2997ff; align-self: center; }
 
+#hood .hood-fits { margin-top: 8px; }
+#hood .proof-stats { grid-template-columns: 1fr 1fr; max-width: none; }
+#hood .part-list { max-width: none; margin-bottom: 8px; }
+#hood .hood-out { display: inline-flex; margin-top: 18px; }
 #hood .lab-link { font-size: 14px; }
 #hood .site-note { background: transparent; padding: 24px 0 0; text-align: left; }
 
