@@ -1,4 +1,4 @@
-import { createGraph } from "./graph.js?v=0.2.7";
+import { createGraph } from "./graph.js?v=0.2.8";
 import { createPanel } from "./panel.js";
 import { createSolutionsApi } from "./solutions.js";
 import { createSolutionsUI } from "./solutions-ui.js";
