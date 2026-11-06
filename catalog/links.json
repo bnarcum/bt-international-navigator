@@ -15,6 +15,8 @@
     { "source": "one-cloud-cisco", "target": "cisco-collaboration", "type": "direct", "label": "Cisco stack" },
     { "source": "cisco-collaboration", "target": "webex-meetings", "type": "direct", "label": "Meetings" },
     { "source": "webex-calling", "target": "webex-meetings", "type": "adjacent", "label": "Same suite" },
+    { "source": "webex-calling", "target": "collab-devices", "type": "gap", "label": "Devices" },
+    { "source": "webex-meetings", "target": "collab-devices", "type": "gap", "label": "Devices" },
     { "source": "uc-edge", "target": "cisco-collaboration", "type": "adjacent", "label": "Cisco UC" },
     { "source": "sase", "target": "uc-edge", "type": "adjacent", "label": "Secure access" },
     { "source": "ops-fabric", "target": "global-fabric", "type": "direct", "label": "Operate network" },

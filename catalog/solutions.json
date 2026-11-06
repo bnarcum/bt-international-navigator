@@ -61,9 +61,9 @@
       "lede": "Cisco calling and meetings, in Cisco’s cloud or hosted by BT.",
       "why": "Customers who standardised on Cisco need a global voice layer and a hosted option, not another stack.",
       "useCases": ["Cloud calling", "Hybrid work"],
-      "capabilities": ["Webex Calling", "Webex Meetings", "BT-hosted Cisco"],
+      "capabilities": ["Webex Calling", "Webex Meetings", "BT-hosted Cisco", "Collaboration devices"],
       "url": "https://international.bt.com/products-services/voice-collaboration-CX/cloud-collaboration-tools",
-      "families": ["webex-calling", "webex-meetings", "one-cloud-cisco", "cisco-collaboration", "uc-edge"]
+      "families": ["webex-calling", "webex-meetings", "one-cloud-cisco", "cisco-collaboration", "uc-edge", "collab-devices"]
     },
     {
       "id": "ops-fabric",

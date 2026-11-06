@@ -105,7 +105,7 @@ export function createGraph(svgEl, { families, links, onNodeClick, onNodeHover }
     .selectAll("path")
     .data(linkData)
     .join("path")
-    .attr("class", (d) => (d._cross ? "link cross" : "link"));
+    .attr("class", (d) => ["link", d.type === "gap" ? "gap" : d._cross ? "cross" : ""].filter(Boolean).join(" "));
 
   const linkLabel = g
     .append("g")
@@ -113,7 +113,7 @@ export function createGraph(svgEl, { families, links, onNodeClick, onNodeHover }
     .selectAll("text")
     .data(linkData)
     .join("text")
-    .attr("class", (d) => (d._cross ? "llab cross" : "llab"))
+    .attr("class", (d) => ["llab", d.type === "gap" ? "gap" : d._cross ? "cross" : ""].filter(Boolean).join(" "))
     .text((d) => d.label || "");
 
   const node = g
@@ -122,7 +122,7 @@ export function createGraph(svgEl, { families, links, onNodeClick, onNodeHover }
     .selectAll("g")
     .data(nodes)
     .join("g")
-    .attr("class", (d) => `node token cat-${d.category}`)
+    .attr("class", (d) => `node token cat-${d.category}${d.gap ? " gap" : ""}`)
     .call(
       d3
         .drag()
@@ -281,13 +281,13 @@ export function createGraph(svgEl, { families, links, onNodeClick, onNodeHover }
       return idSet.has(s) && idSet.has(t);
     });
     linkLabel.classed("on", (d) => {
-      if (!active) return !!d._cross;
+      if (!active) return !!d._cross || d.type === "gap";
       const s = d.source.id || d.source;
       const t = d.target.id || d.target;
       return idSet.has(s) && idSet.has(t);
     });
     if (!active) {
-      linkLabel.classed("on", (d) => d._cross);
+      linkLabel.classed("on", (d) => d._cross || d.type === "gap");
       node.classed("lit", false).classed("dim", false);
     }
   }

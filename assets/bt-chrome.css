@@ -300,7 +300,10 @@ body.view-graph #gw {
 }
 
 #gs .link.cross { stroke: rgba(41, 151, 255, 0.28); stroke-width: 1.4; }
+#gs .link.gap { stroke: #c4b5fd; stroke-width: 1.5; stroke-dasharray: 2 5; }
+#gs .link.gap.lit { stroke: #e9d5ff; stroke-width: 2.1; stroke-dasharray: 2 5; }
 #gs .link.lit { stroke: #2997ff; stroke-width: 2.1; filter: url(#soft-glow); }
+#gs .node.gap .plate { stroke-dasharray: 5 4; }
 
 #gs .llab {
   font-size: 10px;
@@ -312,6 +315,7 @@ body.view-graph #gw {
 
 #gs .llab.on,
 #gs .llab.cross.on { display: inherit; fill: #9ccfff; }
+#gs .llab.gap.on { display: inherit; fill: #c4b5fd; }
 
 #gs .node { cursor: pointer; }
 #gs .node .plate { filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.35)); }
@@ -1312,6 +1316,15 @@ button.arch-node, button.partner { cursor: pointer; }
   color: #fff;
   border-color: #c4b5fd;
   font-weight: 650;
+}
+.partner.cisco.gap {
+  background: transparent;
+  color: #c4b5fd;
+  border-style: dashed;
+}
+.arch-dash {
+  width: 28px;
+  border-top: 1.5px dashed #c4b5fd;
 }
 .partner.quiet {
   color: #aeaeb2;

@@ -18,7 +18,7 @@
         {
           "id": "workplace",
           "name": "Collaboration",
-          "desc": "Webex calling, meetings, and the UC Edge path into GSIP."
+          "desc": "Webex calling and meetings, plus Cisco devices as an open attach."
         }
       ]
     }

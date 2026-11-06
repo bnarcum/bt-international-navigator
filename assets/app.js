@@ -1,4 +1,4 @@
-import { createGraph } from "./graph.js?v=0.2.2";
+import { createGraph } from "./graph.js?v=0.2.3";
 import { createPanel } from "./panel.js";
 import { createSolutionsApi } from "./solutions.js";
 import { createSolutionsUI } from "./solutions-ui.js";
@@ -800,6 +800,8 @@ function architectureDiagram() {
         </div>
         <div class="arch-partners">
           <button type="button" class="partner cisco" data-kind="family" data-id="webex-calling">Webex</button>
+          <span class="arch-dash" aria-hidden="true"></span>
+          <button type="button" class="partner cisco gap" data-kind="family" data-id="collab-devices">Cisco devices</button>
           <span class="partner quiet">Microsoft Teams</span>
           <span class="partner quiet">Zoom</span>
         </div>
@@ -906,6 +908,7 @@ function renderTopicPage(id) {
     ${sellerSky()}
     <div class="seller-wrap tone-${esc(port?.id || "connectivity")}">
       ${sellerTrail()}
+      ${f.gap ? `<p class="seller-cue">Open opportunity</p>` : ""}
       ${state.sellerCue ? `<p class="seller-cue">For ${esc(state.sellerCue)}</p>` : ""}
       <h1>${esc(f.name)}</h1>
       <p class="seller-line">${esc(seller.sentence || f.desc)}</p>

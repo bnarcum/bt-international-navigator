@@ -39,8 +39,8 @@
       "id": "collaboration",
       "name": "Voice, Collaboration & CX",
       "line": "Global Voice, Webex, One Cloud Cisco, and UC Edge.",
-      "aliases": ["webex", "calling", "meetings", "uc edge", "voice", "collaboration"],
-      "families": ["global-voice", "webex-calling", "webex-meetings", "one-cloud-cisco", "cisco-collaboration", "uc-edge"]
+      "aliases": ["webex", "calling", "meetings", "uc edge", "voice", "collaboration", "devices", "room kit", "desk", "board"],
+      "families": ["global-voice", "webex-calling", "webex-meetings", "one-cloud-cisco", "cisco-collaboration", "uc-edge", "collab-devices"]
     },
     {
       "id": "managed",

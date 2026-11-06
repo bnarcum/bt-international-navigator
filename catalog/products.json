@@ -49,6 +49,16 @@
       "url": "https://www.webex.com/",
       "families": ["uc-edge", "cisco-collaboration"],
       "offerings": ["cisco-collab", "global-voice"]
+    },
+    {
+      "id": "collab-devices",
+      "oem": "cisco",
+      "group": "workplace",
+      "name": "Collaboration Devices",
+      "why": "Rooms, boards, desks, and phones. Not named on BT’s public collaboration page. The Webex Meetings schedule already registers Room Kit, Board, and Desk series.",
+      "url": "https://www.cisco.com/c/en/us/products/collaboration-endpoints/index.html",
+      "families": ["collab-devices", "webex-calling", "webex-meetings", "cisco-collaboration"],
+      "offerings": ["cisco-collab"]
     }
   ]
 }

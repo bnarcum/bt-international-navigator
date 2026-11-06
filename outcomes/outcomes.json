@@ -40,7 +40,7 @@
       },
       "useCases": ["Cloud calling", "Hybrid work"],
       "solutions": ["global-voice", "cisco-collab"],
-      "families": ["global-voice", "uc-edge", "webex-calling", "webex-meetings", "one-cloud-cisco", "cisco-collaboration"]
+      "families": ["global-voice", "uc-edge", "webex-calling", "webex-meetings", "one-cloud-cisco", "cisco-collaboration", "collab-devices"]
     },
     {
       "id": "operate-the-estate",

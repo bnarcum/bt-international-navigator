@@ -175,7 +175,7 @@
           "url": "https://international.bt.com/products-services/voice-collaboration-CX/cloud-collaboration-tools",
           "hint": "Cisco Collaboration proposition \u2014 meetings, messaging, calling."
         },
-        "fits": "The umbrella over Webex Calling, Webex Meetings, and One Cloud Cisco."
+        "fits": "The umbrella over Webex Calling, Webex Meetings, and One Cloud Cisco. Collaboration devices sit beside it as an open attach."
       }
     },
     {
@@ -192,6 +192,23 @@
           "hint": "UC Edge is the flexible voice layer on Global Voice."
         },
         "fits": "Keeps numbers on Global Voice and routes them to Webex, Teams, or Zoom."
+      }
+    },
+    {
+      "id": "collab-devices",
+      "name": "Collaboration Devices",
+      "category": "collaboration",
+      "pillar": "collaboration",
+      "gap": true,
+      "desc": "Cisco rooms, boards, desks, and phones — the endpoint layer missing from BT’s public collaboration story.",
+      "seller": {
+        "sentence": "Rooms, boards, desks, and phones are where Webex Calling and Meetings land in the building.",
+        "next": {
+          "label": "Cisco Collaboration Devices",
+          "url": "https://www.cisco.com/c/en/us/products/collaboration-endpoints/index.html",
+          "hint": "Cisco’s public devices page. BT’s marketing page does not name this product."
+        },
+        "fits": "Not named on BT’s public collaboration page. The Webex Meetings schedule already registers Room Kit, Board, and Desk, and that page only says devices under Microsoft Teams."
       }
     },
     {
