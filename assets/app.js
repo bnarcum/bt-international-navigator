@@ -1,4 +1,4 @@
-import { createGraph } from "./graph.js?v=0.2.12";
+import { createGraph } from "./graph.js?v=0.2.13";
 import { createPanel } from "./panel.js";
 import { createSolutionsApi } from "./solutions.js";
 import { createSolutionsUI } from "./solutions-ui.js";
@@ -14,8 +14,8 @@ import {
   oemProductsOn,
   productsOn,
   renderEdge,
-} from "./hood.js?v=0.2.12";
-import { markSvg } from "./marks.js?v=0.2.12";
+} from "./hood.js?v=0.2.13";
+import { markSvg } from "./marks.js?v=0.2.13";
 
 const BUILD = "0.1.0";
 
@@ -437,19 +437,13 @@ function youAre(title, lede, pillar) {
     </div>`;
 }
 
-function officialDest(url) {
-  const host = linkHost(url);
-  if (host === "international.bt.com") return "Official BT International site";
-  if (host.endsWith("cisco.com") || host.endsWith("webex.com")) return "Official Cisco site";
-  return host ? `Opens ${host}` : "Opens in a new tab";
-}
-
 function outLink(url, label) {
   if (!url) return "";
-  return `<a class="hood-leave" href="${esc(url)}" target="_blank" rel="noopener noreferrer">
-    <span class="hood-leave-k">Leaves this navigator</span>
-    <span class="hood-leave-name">${esc(label || officialDest(url))}</span>
-    <span class="hood-leave-host">${esc(officialDest(url))}</span>
+  const host = linkHost(url);
+  const name = label || host || "Open";
+  return `<a class="hood-leave" href="${esc(url)}" target="_blank" rel="noopener noreferrer" aria-label="${esc(name)} on ${esc(host || "the official site")}">
+    <span class="hood-leave-name">${esc(name)}</span>
+    <span class="hood-leave-host">${esc(host)}</span>
   </a>`;
 }
 
@@ -968,7 +962,7 @@ function renderTopicPage(id) {
       <div class="seller-actions">
         ${
           next
-            ? `<a class="seller-next" href="${esc(next.url)}" target="_blank" rel="noopener noreferrer"><span>${esc(next.label)}</span><span class="seller-next-sub">Leaves this navigator · ${esc(officialDest(next.url))}</span></a>`
+            ? `<a class="seller-next" href="${esc(next.url)}" target="_blank" rel="noopener noreferrer" aria-label="${esc(next.label)} on ${esc(linkHost(next.url))}"><span>${esc(next.label)}</span><span class="seller-next-sub">${esc(linkHost(next.url))}</span></a>`
             : ""
         }
         <button type="button" class="seller-map" data-kind="family" data-id="${esc(f.id)}" data-map="1">See how it connects</button>
