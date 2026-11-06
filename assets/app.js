@@ -784,7 +784,7 @@ function renderSellerHome() {
   return `
     ${sellerSky()}
     <div class="seller-wrap seller-home">
-      <p class="hood-kicker">BT International</p>
+      <img class="brand-lockup" src="assets/brand/bt-international-logo.png" alt="BT International" width="220" height="197">
       <h1>Choose a domain.</h1>
       <div class="port-grid">${list}</div>
       <p class="seller-foot">${esc(state.config.disclaimer || "")}</p>
