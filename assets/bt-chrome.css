@@ -1403,22 +1403,33 @@ button.arch-node, button.partner { cursor: pointer; }
 .arch-next { margin-top: 8px; color: #98989d; }
 .arch-wrap .arch-node { width: 100%; border-radius: 14px; text-align: left; }
 .seller-fits { max-width: 40rem; color: #d1d1d6; font-size: 17px; line-height: 1.45; margin: -8px 0 22px; }
-.part-k { margin: 0 0 10px; }
+.part-k { margin: 0 0 8px; }
 .part-list {
   list-style: none;
   display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin: 0 0 28px;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0 0 22px;
+  padding: 0;
   max-width: 42rem;
 }
 .part-list li {
-  padding: 10px 14px;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #f5f5f7;
-  font-size: 14px;
+  padding: 0;
+  border: none;
+  background: none;
+  color: #d1d1d6;
+  font-size: 15px;
+  line-height: 1.4;
+}
+.part-list li::before {
+  content: "";
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  margin-right: 10px;
+  border-radius: 50%;
+  background: #64d2ff;
+  vertical-align: 2px;
 }
 .proof-stats {
   list-style: none;
