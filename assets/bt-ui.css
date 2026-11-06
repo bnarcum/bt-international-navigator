@@ -45,7 +45,7 @@ button, input { font-family: inherit; }
 
 a { color: var(--link); text-decoration: none; }
 
-.wwt-btn,
+.bt-btn,
 .text-link {
   background: none;
   border: none;
@@ -57,13 +57,13 @@ a { color: var(--link); text-decoration: none; }
 }
 
 .text-link:hover,
-.wwt-btn:hover { text-decoration: underline; }
+.bt-btn:hover { text-decoration: underline; }
 
-.wwt-btn.ghost { color: var(--link); }
+.bt-btn.ghost { color: var(--link); }
 
-.wwt-btn.cyan::after,
+.bt-btn.cyan::after,
 .text-link::after,
-.wwt-btn.ghost::after {
+.bt-btn.ghost::after {
   content: " ›";
   font-weight: 500;
 }

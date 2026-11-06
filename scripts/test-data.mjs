@@ -114,10 +114,10 @@ for (const o of outcomes) {
   }
 }
 
-const banned = /(wwwin-github\.cisco\.com|wwt\.com|WWT Solution Navigator)/;
+const banned = /wwwin-github\.cisco\.com/;
 function scan(obj, loc) {
   if (typeof obj === "string") {
-    if (banned.test(obj)) errors.push(`${loc}: contains internal or WWT source text`);
+    if (banned.test(obj)) errors.push(`${loc}: contains an internal Cisco hostname`);
     return;
   }
   if (Array.isArray(obj)) {

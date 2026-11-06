@@ -140,7 +140,7 @@ body.view-graph #gw {
 }
 
 #canvas-ui .fr,
-#canvas-ui .wwt-pill,
+#canvas-ui .bt-pill,
 #canvas-ui .oem-lens,
 #canvas-ui .oem-chip { pointer-events: auto; }
 
@@ -569,7 +569,7 @@ body.view-graph #gw {
 #graph-bar { display: none !important; }
 .fr { display: flex; gap: 8px; flex-wrap: wrap; }
 
-.wwt-pill {
+.bt-pill {
   display: inline-flex;
   align-items: center;
   gap: 7px;
@@ -583,8 +583,8 @@ body.view-graph #gw {
   backdrop-filter: blur(12px);
 }
 
-.wwt-pill.active { background: #f5f5f7; color: #000; border-color: #f5f5f7; }
-.wwt-pill .mark { color: inherit; }
+.bt-pill.active { background: #f5f5f7; color: #000; border-color: #f5f5f7; }
+.bt-pill .mark { color: inherit; }
 
 .linkish {
   background: none;
