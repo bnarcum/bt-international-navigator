@@ -28,13 +28,13 @@ function wrapLabel(name) {
 function tokenBox(name, pillar, deg) {
   const lines = wrapLabel(name);
   const meta = `${PILLAR_SHORT[pillar] || pillar} · ${deg}`;
-  const titleW = Math.max(...lines.map((l) => l.length)) * 6.8;
-  const metaW = meta.length * 5.6;
-  const w = Math.max(132, Math.ceil(52 + Math.max(titleW, metaW)));
-  const title0 = 22;
-  const titleLh = 14;
-  const metaDy = 15;
-  const padBot = 22;
+  const titleW = Math.max(...lines.map((l) => l.length)) * 7.2;
+  const metaW = meta.length * 5.8;
+  const w = Math.max(156, Math.ceil(72 + Math.max(titleW, metaW)));
+  const title0 = 27;
+  const titleLh = 16;
+  const metaDy = 16;
+  const padBot = 16;
   const h = title0 + (lines.length - 1) * titleLh + metaDy + padBot;
   return { lines, meta, w, h, title0, titleLh, metaDy };
 }
@@ -62,6 +62,12 @@ export function createGraph(svgEl, { families, links, onNodeClick, onNodeHover }
   svg.selectAll("*").remove();
 
   const defs = svg.append("defs");
+  const plateFill = defs.append("linearGradient").attr("id", "plate-fill").attr("x1", "0").attr("y1", "0").attr("x2", "0").attr("y2", "1");
+  plateFill.append("stop").attr("offset", "0%").attr("stop-color", "#222633");
+  plateFill.append("stop").attr("offset", "100%").attr("stop-color", "#101218");
+  const plateSheen = defs.append("linearGradient").attr("id", "plate-sheen").attr("x1", "0").attr("y1", "0").attr("x2", "0").attr("y2", "1");
+  plateSheen.append("stop").attr("offset", "0%").attr("stop-color", "#fff").attr("stop-opacity", "0.16");
+  plateSheen.append("stop").attr("offset", "46%").attr("stop-color", "#fff").attr("stop-opacity", "0");
   const glow = defs.append("filter").attr("id", "soft-glow").attr("x", "-50%").attr("y", "-50%").attr("width", "200%").attr("height", "200%");
   glow.append("feGaussianBlur").attr("stdDeviation", "3.2").attr("result", "b");
   const merge = glow.append("feMerge");
@@ -149,16 +155,38 @@ export function createGraph(svgEl, { families, links, onNodeClick, onNodeHover }
     .attr("y", (d) => -d._h / 2)
     .attr("width", (d) => d._w)
     .attr("height", (d) => d._h)
-    .attr("rx", 16)
-    .attr("fill", "#12141c")
+    .attr("rx", 18)
+    .attr("fill", "url(#plate-fill)")
     .attr("stroke", (d) => CAT_COLORS[d.category] || "#2997ff")
-    .attr("stroke-width", 1.4);
+    .attr("stroke-width", 1);
+
+  node
+    .append("rect")
+    .attr("class", "plate-sheen")
+    .attr("x", (d) => -d._w / 2)
+    .attr("y", (d) => -d._h / 2)
+    .attr("width", (d) => d._w)
+    .attr("height", (d) => d._h)
+    .attr("rx", 18)
+    .attr("fill", "url(#plate-sheen)")
+    .attr("pointer-events", "none");
+
+  node
+    .append("rect")
+    .attr("class", "mark-well")
+    .attr("x", (d) => -d._w / 2 + 12)
+    .attr("y", (d) => -d._h / 2 + 14)
+    .attr("width", 28)
+    .attr("height", 28)
+    .attr("rx", 9)
+    .attr("fill", (d) => CAT_COLORS[d.category] || "#2997ff")
+    .attr("fill-opacity", 0.18);
 
   const mark = node
     .append("path")
     .attr("class", "mark")
-    .attr("d", (d) => MARK_PATH[d.pillar] || MARK_PATH.cloud)
-    .attr("transform", (d) => `translate(${-d._w / 2 + 12}, ${-d._h / 2 + 10}) scale(0.72)`);
+    .attr("d", (d) => MARK_PATH[d.pillar] || MARK_PATH.connectivity)
+    .attr("transform", (d) => `translate(${-d._w / 2 + 17.6}, ${-d._h / 2 + 19.6}) scale(0.7)`);
 
   mark.each(function (d) {
     const el = d3.select(this);
@@ -175,10 +203,10 @@ export function createGraph(svgEl, { families, links, onNodeClick, onNodeHover }
     .attr("class", "nlab")
     .attr("text-anchor", "start")
     .attr("dominant-baseline", "alphabetic")
-    .attr("font-size", 11);
+    .attr("font-size", 13);
   labels.each(function (d) {
     const sel = d3.select(this);
-    const x = -d._w / 2 + 34;
+    const x = -d._w / 2 + 50;
     d.lines.forEach((line, i) => {
       sel
         .append("tspan")
@@ -193,8 +221,8 @@ export function createGraph(svgEl, { families, links, onNodeClick, onNodeHover }
     .attr("class", "nmeta")
     .attr("text-anchor", "start")
     .attr("dominant-baseline", "alphabetic")
-    .attr("font-size", 9)
-    .attr("x", (d) => -d._w / 2 + 34)
+    .attr("font-size", 10)
+    .attr("x", (d) => -d._w / 2 + 50)
     .attr("y", (d) => -d._h / 2 + d.title0 + (d.lines.length - 1) * d.titleLh + d.metaDy)
     .text((d) => d.meta);
 

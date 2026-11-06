@@ -1,4 +1,4 @@
-import { createGraph } from "./graph.js?v=0.2.14";
+import { createGraph } from "./graph.js?v=0.2.15";
 import { createPanel } from "./panel.js";
 import { createSolutionsApi } from "./solutions.js";
 import { createSolutionsUI } from "./solutions-ui.js";
@@ -14,8 +14,8 @@ import {
   oemProductsOn,
   productsOn,
   renderEdge,
-} from "./hood.js?v=0.2.14";
-import { markSvg } from "./marks.js?v=0.2.14";
+} from "./hood.js?v=0.2.15";
+import { markSvg } from "./marks.js?v=0.2.15";
 
 const BUILD = "0.1.0";
 

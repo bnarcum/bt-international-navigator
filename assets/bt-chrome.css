@@ -318,10 +318,13 @@ body.view-graph #gw {
 #gs .llab.gap.on { display: inherit; fill: #c4b5fd; }
 
 #gs .node { cursor: pointer; }
-#gs .node .plate { filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.35)); }
-#gs .node.lit .plate { stroke-width: 2; }
-#gs .node.sel .plate { stroke-width: 2.4; filter: url(#soft-glow); }
-#gs .node.hot .plate { stroke: #fff; stroke-width: 2.6; filter: url(#soft-glow); }
+#gs .node .plate {
+  filter: drop-shadow(0 14px 28px rgba(0, 0, 0, 0.45));
+  stroke-opacity: 0.42;
+}
+#gs .node.lit .plate { stroke-width: 1.5; stroke-opacity: 0.95; }
+#gs .node.sel .plate { stroke-width: 1.75; stroke-opacity: 1; filter: url(#soft-glow); }
+#gs .node.hot .plate { stroke: #fff; stroke-width: 1.8; stroke-opacity: 1; filter: url(#soft-glow); }
 #gs .node.hot { opacity: 1; }
 #gs .node.dim { opacity: 0.2; }
 #gs .node.no-oem { opacity: 0.22; }
@@ -333,9 +336,11 @@ body.view-graph #gw {
 #gs text {
   line-height: 1;
   letter-spacing: 0;
+  font-family: var(--font);
 }
-#gs .nlab { font-size: 11px; font-weight: 650; fill: #f5f5f7; pointer-events: none; }
-#gs .nmeta { font-size: 9px; fill: #86868b; pointer-events: none; }
+#gs .nlab { font-size: 13px; font-weight: 600; letter-spacing: -0.02em; fill: #f5f5f7; pointer-events: none; }
+#gs .nmeta { font-size: 10px; fill: #8e8e93; pointer-events: none; }
+#gs .plate-sheen, #gs .mark-well, #gs .mark { pointer-events: none; }
 
 #hood {
   min-height: 0;
