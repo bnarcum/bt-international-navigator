@@ -32,8 +32,8 @@ html, body { min-height: 100%; }
 
 body {
   font-family: var(--font);
-  background: var(--black);
-  color: var(--white);
+  background: #f6f4f8;
+  color: #1d1d1f;
   line-height: 1.47;
   -webkit-font-smoothing: antialiased;
   letter-spacing: -0.011em;

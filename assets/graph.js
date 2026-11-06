@@ -150,7 +150,7 @@ export function createGraph(svgEl, { families, links, onNodeClick, onNodeHover }
     .attr("width", (d) => d._w)
     .attr("height", (d) => d._h)
     .attr("rx", 16)
-    .attr("fill", "#12141c")
+    .attr("fill", "#ffffff")
     .attr("stroke", (d) => CAT_COLORS[d.category] || "#2997ff")
     .attr("stroke-width", 1.4);
 

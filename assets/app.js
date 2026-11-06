@@ -1,4 +1,4 @@
-import { createGraph } from "./graph.js?v=0.13.0";
+import { createGraph } from "./graph.js?v=0.2.0";
 import { createPanel } from "./panel.js";
 import { createSolutionsApi } from "./solutions.js";
 import { createSolutionsUI } from "./solutions-ui.js";
@@ -163,6 +163,12 @@ const GROUP_MARK = {
   workplace: "collaboration",
   networking: "connectivity",
   security: "managed",
+};
+
+const QUIET_PARTNERS = {
+  sase: ["Fortinet", "Netskope", "Zscaler"],
+  "global-fabric": ["Fortinet", "Netskope", "Zscaler"],
+  "uc-edge": ["Microsoft Teams", "Zoom"],
 };
 
 function resolveCatalogFocus(id) {
@@ -717,52 +723,54 @@ function sellerTrail() {
   </nav>`;
 }
 
-function portfolioArt(id) {
-  const arts = {
-    connectivity: `<svg class="art" viewBox="0 0 200 150" aria-hidden="true">
-      <circle class="glow" cx="100" cy="78" r="58"/>
-      <g fill="none" stroke="currentColor" stroke-width="1.6">
-        <path class="dash" d="M40 108 C70 40, 130 40, 160 108"/>
-        <path class="dash" d="M48 48 C90 90, 110 40, 156 72"/>
-      </g>
-      <g fill="currentColor">
-        <circle cx="40" cy="108" r="5"/><circle cx="160" cy="108" r="5"/>
-        <circle class="pulse" cx="100" cy="58" r="7"/><circle cx="156" cy="72" r="5"/>
-      </g>
-    </svg>`,
-    collaboration: `<svg class="art" viewBox="0 0 200 150" aria-hidden="true">
-      <circle class="glow" cx="100" cy="78" r="58"/>
-      <g class="spin" fill="none" stroke="currentColor" stroke-width="1.6">
-        <circle cx="74" cy="66" r="18"/><circle cx="126" cy="66" r="18"/><circle cx="100" cy="104" r="18"/>
-        <path d="M88 76 L96 94 M112 76 L104 94" opacity=".8"/>
-      </g>
-      <circle class="pulse" cx="74" cy="66" r="4" fill="currentColor"/>
-      <circle class="pulse" cx="126" cy="66" r="4" fill="currentColor"/>
-      <circle class="pulse" cx="100" cy="104" r="4" fill="currentColor"/>
-    </svg>`,
-    managed: `<svg class="art" viewBox="0 0 200 150" aria-hidden="true">
-      <circle class="glow" cx="100" cy="76" r="58"/>
-      <circle class="spin ring" cx="100" cy="76" r="42" fill="none" stroke="currentColor" stroke-width="1.2" stroke-dasharray="8 10"/>
-      <path fill="currentColor" d="M100 40 l28 10 v22 c0 18-12 30-28 36-16-6-28-18-28-36 V50 z" opacity=".9"/>
-      <path class="pulse" fill="none" stroke="#050507" stroke-width="2" d="M88 76 l8 8 16-18"/>
-    </svg>`,
-  };
-  return arts[id] || arts.connectivity;
+function archNode(id, label, extra = "") {
+  return `<button type="button" class="arch-node ${extra}" data-kind="family" data-id="${esc(id)}">${esc(label)}</button>`;
 }
 
-function stepIcon(step) {
-  const icons = {
-    strategy: `<path d="M5 16.2V7.8A2.3 2.3 0 0 1 7.3 5.5h9.4A2.3 2.3 0 0 1 19 7.8v5.2a2.3 2.3 0 0 1-2.3 2.3H9.2L5 19z"/>`,
-    lab: `<circle cx="12" cy="12" r="6.5"/><path d="M9.2 12.2 11 14l3.8-4.2"/>`,
-    build: `<rect x="4" y="5" width="16" height="4.2" rx="1"/><rect x="5.5" y="10.2" width="13" height="4.2" rx="1"/><rect x="7" y="15.4" width="10" height="4" rx="1"/>`,
-    adoption: `<path d="M16.5 7.2A6.2 6.2 0 0 0 7 9.2"/><path d="M7.5 16.8A6.2 6.2 0 0 0 17 14.8"/><path d="M16.2 4.8v3.2h3.2"/><path d="M7.8 19.2v-3.2H4.6"/>`,
-  };
-  const d = icons[(step || "").toLowerCase()] || icons.strategy;
-  return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round" aria-hidden="true">${d}</svg>`;
-}
-
-function sellerSky() {
-  return `<div class="seller-sky" aria-hidden="true"><span class="orb orb-a"></span><span class="orb orb-b"></span><span class="orb orb-c"></span></div>`;
+function architectureDiagram() {
+  return `
+    <figure class="arch" aria-label="How BT International products connect">
+      <div class="arch-band">
+        <p class="arch-k">Access</p>
+        <div class="arch-row">
+          ${archNode("dia", "Direct Internet Access")}
+          ${archNode("icr", "Internet Connect Reach")}
+          <span class="arch-arrow" aria-hidden="true">→</span>
+          ${archNode("global-fabric", "Global Fabric", "arch-core")}
+        </div>
+      </div>
+      <div class="arch-band">
+        <p class="arch-k">On the fabric</p>
+        <div class="arch-row">
+          ${archNode("sdwan", "SD-WAN")}
+          <span class="arch-arrow" aria-hidden="true">→</span>
+          ${archNode("sase", "SASE / SSE")}
+        </div>
+        <div class="arch-partners">
+          <button type="button" class="partner cisco" data-kind="family" data-id="sdwan">Cisco SD-WAN</button>
+          <button type="button" class="partner cisco" data-kind="family" data-id="sase">Cisco Secure Access</button>
+          <span class="partner quiet">Fortinet</span>
+          <span class="partner quiet">Netskope</span>
+          <span class="partner quiet">Zscaler</span>
+        </div>
+      </div>
+      <div class="arch-band">
+        <p class="arch-k">Voice</p>
+        <div class="arch-row">
+          ${archNode("global-voice", "Global Voice")}
+          <span class="arch-arrow" aria-hidden="true">→</span>
+          ${archNode("uc-edge", "UC Edge")}
+        </div>
+        <div class="arch-partners">
+          <button type="button" class="partner cisco" data-kind="family" data-id="webex-calling">Webex</button>
+          <span class="partner quiet">Microsoft Teams</span>
+          <span class="partner quiet">Zoom</span>
+        </div>
+      </div>
+      <div class="arch-band arch-wrap">
+        ${archNode("ops-fabric", "Ops Fabric — operates network, voice, and security", "arch-core")}
+      </div>
+    </figure>`;
 }
 
 function renderSellerHome() {
@@ -772,7 +780,6 @@ function renderSellerHome() {
         .map(
           (p, i) => `
           <button type="button" class="port-card tone-${esc(p.id)}" style="--i:${i}" data-kind="portfolio" data-id="${esc(p.id)}">
-            <span class="port-art">${portfolioArt(p.id)}</span>
             <span class="port-copy">
               <strong>${esc(p.name)}</strong>
               <span class="port-line">${esc(p.line)}</span>
@@ -782,10 +789,11 @@ function renderSellerHome() {
         .join("")
     : `<p class="seller-line">The portfolio list did not load. Hard-refresh this page.</p>`;
   return `
-    ${sellerSky()}
     <div class="seller-wrap seller-home">
       <img class="brand-lockup" src="assets/brand/bt-international-logo.png" alt="BT International" width="220" height="197">
-      <h1>Choose a domain.</h1>
+      <h1>How the products connect.</h1>
+      ${architectureDiagram()}
+      <h2 class="arch-next">Or start from a domain</h2>
       <div class="port-grid">${list}</div>
       <p class="seller-foot">${esc(state.config.disclaimer || "")}</p>
     </div>`;
@@ -794,7 +802,6 @@ function renderSellerHome() {
 function renderPortfolioPage(port) {
   const topics = (port.families || []).map((fid) => state.families.find((f) => f.id === fid)).filter(Boolean);
   return `
-    ${sellerSky()}
     <div class="seller-wrap tone-${esc(port.id)}">
       <div class="folio-hero">
         <div>
@@ -802,7 +809,6 @@ function renderPortfolioPage(port) {
           <h1>${esc(port.name)}</h1>
           <p class="seller-line">${esc(port.line)}</p>
         </div>
-        <div class="folio-art">${portfolioArt(port.id)}</div>
       </div>
       <div class="topic-list">
         ${topics
@@ -826,10 +832,11 @@ function renderTopicPage(id) {
   const f = state.families.find((x) => x.id === id);
   if (!f) return renderSellerHome();
   const seller = f.seller || {};
-  const story = seller.story || [];
   const next = seller.next;
   const cisco = productsForTopic(f.id);
   const port = portfolioForFamily(f.id);
+  const quiet = QUIET_PARTNERS[f.id] || [];
+  const proof = seller.proof || [];
   const sell = cisco.length
     ? `<h2>Cisco</h2><div class="sell-grid">${cisco
         .map((p) => {
@@ -844,13 +851,24 @@ function renderTopicPage(id) {
         })
         .join("")}</div>`
     : "";
+  const also = quiet.length
+    ? `<h2>Also on this path</h2><div class="arch-partners">${quiet
+        .map((name) => `<span class="partner quiet">${esc(name)}</span>`)
+        .join("")}</div>`
+    : "";
+  const stats = proof.length
+    ? `<ul class="proof-stats">${proof
+        .map((p) => `<li><b>${esc(p.n)}</b><span>${esc(p.l)}</span></li>`)
+        .join("")}</ul>`
+    : "";
   return `
-    ${sellerSky()}
     <div class="seller-wrap tone-${esc(port?.id || "connectivity")}">
       ${sellerTrail()}
       ${state.sellerCue ? `<p class="seller-cue">For ${esc(state.sellerCue)}</p>` : ""}
       <h1>${esc(f.name)}</h1>
       <p class="seller-line">${esc(seller.sentence || f.desc)}</p>
+      ${seller.fits ? `<p class="seller-fits">${esc(seller.fits)}</p>` : ""}
+      ${stats}
       <div class="seller-actions">
         ${
           next
@@ -859,17 +877,8 @@ function renderTopicPage(id) {
         }
         <button type="button" class="seller-map" data-kind="family" data-id="${esc(f.id)}" data-map="1">See how it connects</button>
       </div>
-      ${next?.hint ? `<p class="seller-next-hint">${esc(next.hint)}</p>` : ""}
-      ${
-        story.length
-          ? `<ol class="journey" aria-label="How it runs">${story
-              .map(
-                (s, i) => `<li style="--i:${i}"><span class="j-mark">${stepIcon(s.step)}</span><em>${esc(s.step)}</em><p>${esc(s.text)}</p></li>`
-              )
-              .join("")}</ol>`
-          : ""
-      }
       ${sell}
+      ${also}
     </div>`;
 }
 

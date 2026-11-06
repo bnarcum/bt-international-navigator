@@ -5,24 +5,32 @@
       "name": "Global Fabric",
       "category": "connectivity",
       "pillar": "connectivity",
-      "desc": "AI-ready Network-as-a-Service — offices, clouds, apps, and partners on one platform.",
+      "desc": "AI-ready Network-as-a-Service \u2014 offices, clouds, apps, and partners on one platform.",
       "seller": {
         "sentence": "Connect sites, clouds, and applications worldwide from one NaaS platform.",
-        "why": [
-          "Multinationals stall when every region is a different network and a different contract.",
-          "Global Fabric provisions, scales, and observes connectivity on demand.",
-          "SSE, SD-WAN, and internet access sit on the same fabric instead of beside it."
-        ],
         "next": {
           "label": "Global Fabric on BT International",
           "url": "https://international.bt.com/platforms/global-fabric",
-          "hint": "NaaS platform page — footprint, demos, and how sites connect."
+          "hint": "NaaS platform page \u2014 footprint, demos, and how sites connect."
         },
-        "story": [
-          { "step": "Connect", "text": "Sites, clouds, and partners share one software-defined fabric." },
-          { "step": "Scale", "text": "Capacity and new locations provision on demand, not as a new WAN project." },
-          { "step": "Secure", "text": "Peering into SSE choices — Cisco, Fortinet, Netskope, Zscaler." },
-          { "step": "Operate", "text": "Ops Fabric watches the same estate you just stood up." }
+        "fits": "DIA and Internet Connect Reach feed it. SD-WAN and SASE sit on it. Ops Fabric runs it.",
+        "proof": [
+          {
+            "n": "180+",
+            "l": "countries"
+          },
+          {
+            "n": "140",
+            "l": "native PoPs"
+          },
+          {
+            "n": "700",
+            "l": "data centre connections"
+          },
+          {
+            "n": "74%",
+            "l": "of hyperscaler PoPs"
+          }
         ]
       }
     },
@@ -31,25 +39,15 @@
       "name": "Direct Internet Access",
       "category": "connectivity",
       "pillar": "connectivity",
-      "desc": "Dedicated, uncontended internet for cloud, voice, and SaaS — the underlay Global Fabric and SD-WAN ride.",
+      "desc": "Dedicated, uncontended internet for cloud, voice, and SaaS \u2014 the underlay Global Fabric and SD-WAN ride.",
       "seller": {
         "sentence": "Dedicated internet for cloud, collaboration, and the WAN that follows the application.",
-        "why": [
-          "Shared broadband cannot carry voice, SaaS, and SD-WAN at once.",
-          "DIA is the access layer Global Fabric Business Internet builds on.",
-          "It is also the on-ramp for SD-WAN and hybrid work."
-        ],
         "next": {
           "label": "Direct Internet Access",
           "url": "https://international.bt.com/products-services/secure-connectivity/direct-internet-access",
           "hint": "Dedicated internet, Global Fabric Business Internet, and ICR."
         },
-        "story": [
-          { "step": "Access", "text": "Uncontended bandwidth at HQ, regional offices, and remote sites." },
-          { "step": "Path", "text": "Low-latency routes for voice, video, and Microsoft 365." },
-          { "step": "Scale", "text": "Flexible and burstable capacity as demand moves." },
-          { "step": "Fabric", "text": "Global Fabric Business Internet when you want the NaaS wrap." }
-        ]
+        "fits": "Dedicated access under Global Fabric Business Internet and under SD-WAN."
       }
     },
     {
@@ -57,25 +55,15 @@
       "name": "Internet Connect Reach",
       "category": "connectivity",
       "pillar": "connectivity",
-      "desc": "DIA beyond BT’s own PoP footprint, delivered with local ISP partners under one BT relationship.",
+      "desc": "DIA beyond BT\u2019s own PoP footprint, delivered with local ISP partners under one BT relationship.",
       "seller": {
-        "sentence": "Reach markets outside BT’s native PoPs without adding a second internet provider.",
-        "why": [
-          "Coverage gaps force a second ISP and a second operating model.",
-          "ICR extends DIA through trusted local partners.",
-          "The customer still has one BT contract and one fabric story."
-        ],
+        "sentence": "Reach markets outside BT\u2019s native PoPs without adding a second internet provider.",
         "next": {
           "label": "Internet Connect Reach",
           "url": "https://international.bt.com/products-services/secure-connectivity/direct-internet-access",
           "hint": "Described on the DIA page as partner-delivered dedicated internet."
         },
-        "story": [
-          { "step": "Cover", "text": "Markets beyond the native PoP footprint." },
-          { "step": "Partner", "text": "Local ISP delivery, still under BT." },
-          { "step": "Join", "text": "Those sites feed DIA and Global Fabric like any other access." },
-          { "step": "Operate", "text": "One relationship instead of a patchwork of ISPs." }
-        ]
+        "fits": "Extends DIA past BT\u2019s own PoPs, then joins the same Global Fabric path."
       }
     },
     {
@@ -83,25 +71,15 @@
       "name": "SD-WAN",
       "category": "connectivity",
       "pillar": "connectivity",
-      "desc": "Managed SD-WAN over landline, broadband, and 4G/5G — Cisco is one of the stacks BT runs.",
+      "desc": "Managed SD-WAN over landline, broadband, and 4G/5G \u2014 Cisco is one of the stacks BT runs.",
       "seller": {
         "sentence": "Managed SD-WAN so branches, data centers, and cloud share one experience.",
-        "why": [
-          "Hybrid work and SaaS broke the old MPLS-only WAN.",
-          "BT runs a multi-vendor managed overlay, including Cisco.",
-          "SD-WAN is the WAN half of SASE; SSE is the security half."
-        ],
         "next": {
           "label": "SD-WAN and SASE",
           "url": "https://international.bt.com/products-services/secure-connectivity/software-defined-networking",
           "hint": "Managed SD-WAN, SASE, and multi-vendor support."
         },
-        "story": [
-          { "step": "Design", "text": "Choose the overlay — Cisco is one of the supported stacks." },
-          { "step": "Underlay", "text": "DIA, ICR, and Global Fabric carry the packets." },
-          { "step": "Secure", "text": "Pair with SSE to make it SASE." },
-          { "step": "Operate", "text": "Single-pane visibility; Ops Fabric for the managed wrap." }
-        ]
+        "fits": "Rides DIA and Global Fabric. It is the network half of SASE. Cisco is one overlay."
       }
     },
     {
@@ -112,22 +90,12 @@
       "desc": "Cloud security at the edge. Global Fabric peers into Cisco Secure Access, Fortinet, Netskope, and Zscaler.",
       "seller": {
         "sentence": "SASE as SD-WAN plus SSE, with a choice of security vendors on Global Fabric.",
-        "why": [
-          "Users and apps no longer live on one corporate network.",
-          "BT managed SASE pairs SD-WAN with SSE from Cisco and three other vendors.",
-          "Global Fabric peers into those SSE clouds instead of hairpinning the internet."
-        ],
         "next": {
           "label": "SD-WAN and SASE",
           "url": "https://international.bt.com/products-services/secure-connectivity/software-defined-networking",
-          "hint": "Managed SASE — SD-WAN plus a choice of SSE."
+          "hint": "Managed SASE \u2014 SD-WAN plus a choice of SSE."
         },
-        "story": [
-          { "step": "Overlay", "text": "SD-WAN is the network half." },
-          { "step": "Inspect", "text": "SSE from Cisco, Fortinet, Netskope, or Zscaler." },
-          { "step": "Peer", "text": "Global Fabric takes a short path into the vendor’s cloud." },
-          { "step": "Operate", "text": "One managed SASE service, not four DIY integrations." }
-        ]
+        "fits": "SD-WAN plus an SSE. Global Fabric peers into Cisco, Fortinet, Netskope, or Zscaler."
       }
     },
     {
@@ -135,25 +103,15 @@
       "name": "Global Voice",
       "category": "collaboration",
       "pillar": "collaboration",
-      "desc": "Global SIP, inbound contact, and UC Edge — the voice platform under calling and collaboration.",
+      "desc": "Global SIP, inbound contact, and UC Edge \u2014 the voice platform under calling and collaboration.",
       "seller": {
         "sentence": "One voice platform for inbound, outbound, and the UC stack that sits on top.",
-        "why": [
-          "Country-by-country PBX and SIP estates do not scale.",
-          "Global Voice is the carrier layer for Webex, Teams, Zoom, and contact.",
-          "UC Edge routes the same numbers onto whichever collaboration platform the user is on."
-        ],
         "next": {
           "label": "Global Voice",
           "url": "https://international.bt.com/platforms/global-voice",
           "hint": "Global SIP, inbound contact, and UC Edge."
         },
-        "story": [
-          { "step": "Connect", "text": "Global SIP and inbound numbers in one provider." },
-          { "step": "Route", "text": "UC Edge sends calls to Webex, Teams, or Zoom without a port." },
-          { "step": "Secure", "text": "Fraud controls sit in the voice platform, not in each PBX." },
-          { "step": "Operate", "text": "Ops Fabric covers the voice domain with the network." }
-        ]
+        "fits": "The PSTN and SIP layer under Webex Calling, One Cloud Cisco, and UC Edge."
       }
     },
     {
@@ -161,25 +119,15 @@
       "name": "Webex Calling",
       "category": "collaboration",
       "pillar": "collaboration",
-      "desc": "Cloud calling on Webex — from on-prem PBX to a per-user cloud service, including One Cloud Cisco.",
+      "desc": "Cloud calling on Webex \u2014 from on-prem PBX to a per-user cloud service, including One Cloud Cisco.",
       "seller": {
-        "sentence": "Move calling to Webex, on Cisco’s cloud or hosted in BT data centres.",
-        "why": [
-          "On-prem PBX fleets are expensive to keep current across countries.",
-          "Webex Calling is the Cisco cloud path; One Cloud Cisco is BT-hosted Cisco.",
-          "Both sit on Global Voice for PSTN and on UC Edge when the estate is mixed."
-        ],
+        "sentence": "Move calling to Webex, on Cisco\u2019s cloud or hosted in BT data centres.",
         "next": {
           "label": "Cloud collaboration tools",
           "url": "https://international.bt.com/products-services/voice-collaboration-CX/cloud-collaboration-tools",
           "hint": "Webex Calling, One Cloud Cisco, and the wider collaboration set."
         },
-        "story": [
-          { "step": "Choose", "text": "Webex Calling in Cisco’s cloud, or One Cloud Cisco in BT DCs." },
-          { "step": "Connect", "text": "Global Voice provides the PSTN layer." },
-          { "step": "Meet", "text": "Webex Meetings sits next to calling in the same suite." },
-          { "step": "Mix", "text": "UC Edge if some users stay on Teams or Zoom." }
-        ]
+        "fits": "Sits on Global Voice, beside Webex Meetings, and can be hosted as One Cloud Cisco."
       }
     },
     {
@@ -187,25 +135,15 @@
       "name": "Webex Meetings",
       "category": "collaboration",
       "pillar": "collaboration",
-      "desc": "Meetings from any location and device — the meetings half of the Cisco collaboration suite.",
+      "desc": "Meetings from any location and device \u2014 the meetings half of the Cisco collaboration suite.",
       "seller": {
         "sentence": "One meetings service globally, on the same Cisco collaboration path as calling.",
-        "why": [
-          "Meetings fail when every region picks a different platform.",
-          "Webex Meetings is the Cisco meetings offer on the BT collaboration page.",
-          "It sits with calling and Cisco Collaboration, not as a side tool."
-        ],
         "next": {
           "label": "Cloud collaboration tools",
           "url": "https://international.bt.com/products-services/voice-collaboration-CX/cloud-collaboration-tools",
           "hint": "Webex Meetings alongside calling and Cisco Collaboration."
         },
-        "story": [
-          { "step": "Join", "text": "Meetings from any device, any location." },
-          { "step": "Call", "text": "Webex Calling is the voice neighbour in the same suite." },
-          { "step": "Network", "text": "DIA and Global Fabric carry the media." },
-          { "step": "Operate", "text": "Ops Fabric covers the digital-experience domain." }
-        ]
+        "fits": "The meetings half of the same Cisco path as Webex Calling."
       }
     },
     {
@@ -215,23 +153,13 @@
       "pillar": "collaboration",
       "desc": "BT-hosted Cisco voice and collaboration in BT data centres, billed per user per month.",
       "seller": {
-        "sentence": "Cisco collaboration hosted in BT data centres — cloud calling without moving the stack off Cisco.",
-        "why": [
-          "Some customers want Cisco UC in a BT cloud, not Cisco’s public cloud.",
-          "One Cloud Cisco is that hosted path, on a per-user commercial.",
-          "It still maps to Webex Calling and the Cisco Collaboration proposition."
-        ],
+        "sentence": "Cisco collaboration hosted in BT data centres \u2014 cloud calling without moving the stack off Cisco.",
         "next": {
           "label": "Cloud collaboration tools",
           "url": "https://international.bt.com/products-services/voice-collaboration-CX/cloud-collaboration-tools",
-          "hint": "One Cloud Cisco — hosted Cisco voice and collaboration."
+          "hint": "One Cloud Cisco \u2014 hosted Cisco voice and collaboration."
         },
-        "story": [
-          { "step": "Host", "text": "Cisco UC in BT data centres." },
-          { "step": "Bill", "text": "Pay per user per month." },
-          { "step": "Voice", "text": "Global Voice for PSTN; UC Edge if the estate is mixed." },
-          { "step": "Suite", "text": "Same Cisco Collaboration family as calling and meetings." }
-        ]
+        "fits": "Cisco collaboration hosted in BT data centres, still on Global Voice."
       }
     },
     {
@@ -241,23 +169,13 @@
       "pillar": "collaboration",
       "desc": "Meetings, messaging, and calling as one Cisco proposition on the BT collaboration page.",
       "seller": {
-        "sentence": "The Cisco collaboration suite — calling, meetings, and messaging sold as one path.",
-        "why": [
-          "Buying calling, meetings, and rooms as three deals fragments the estate.",
-          "BT lists a Cisco Collaboration proposition next to the Webex SKUs.",
-          "It is the umbrella over Webex Calling, Meetings, and One Cloud Cisco."
-        ],
+        "sentence": "The Cisco collaboration suite \u2014 calling, meetings, and messaging sold as one path.",
         "next": {
           "label": "Cloud collaboration tools",
           "url": "https://international.bt.com/products-services/voice-collaboration-CX/cloud-collaboration-tools",
-          "hint": "Cisco Collaboration proposition — meetings, messaging, calling."
+          "hint": "Cisco Collaboration proposition \u2014 meetings, messaging, calling."
         },
-        "story": [
-          { "step": "Suite", "text": "Calling, meetings, and messaging as one Cisco offer." },
-          { "step": "Host", "text": "Cisco cloud or One Cloud Cisco in BT DCs." },
-          { "step": "Voice", "text": "Global Voice and UC Edge underneath." },
-          { "step": "Partner", "text": "The Cisco 360 / Preferred Partner relationship on the BT Cisco page." }
-        ]
+        "fits": "The umbrella over Webex Calling, Webex Meetings, and One Cloud Cisco."
       }
     },
     {
@@ -268,22 +186,12 @@
       "desc": "Route calling to Webex, Teams, or Zoom on BT GSIP without porting numbers when the platform changes.",
       "seller": {
         "sentence": "Keep the numbers. Change the UC platform. UC Edge sits between GSIP and Webex, Teams, or Zoom.",
-        "why": [
-          "Mergers and platform shifts usually mean number ports and downtime.",
-          "UC Edge routes to Webex, Teams, or Zoom on the same Global Voice layer.",
-          "Webex is one of the three platforms, not the only one."
-        ],
         "next": {
-          "label": "Global Voice — UC Edge",
+          "label": "Global Voice \u2014 UC Edge",
           "url": "https://international.bt.com/platforms/global-voice",
           "hint": "UC Edge is the flexible voice layer on Global Voice."
         },
-        "story": [
-          { "step": "Hold", "text": "Numbers stay on Global Voice / GSIP." },
-          { "step": "Route", "text": "Webex, Teams, or Zoom — without a port." },
-          { "step": "Move", "text": "Users can change platform without a commercial reset." },
-          { "step": "Secure", "text": "SASE still covers the clients, whichever UC they use." }
-        ]
+        "fits": "Keeps numbers on Global Voice and routes them to Webex, Teams, or Zoom."
       }
     },
     {
@@ -293,23 +201,13 @@
       "pillar": "managed",
       "desc": "AI-powered managed operations across connectivity, overlay, security, Global Voice, and digital experience.",
       "seller": {
-        "sentence": "The operating wrap — observability, automation, and experts across network, voice, and security.",
-        "why": [
-          "Global Fabric and Global Voice still need someone to run them.",
-          "Ops Fabric is that operating model: observability, AI, and domain experts.",
-          "It spans connectivity, overlay, network security, Global Voice, and digital experience."
-        ],
+        "sentence": "The operating wrap \u2014 observability, automation, and experts across network, voice, and security.",
         "next": {
           "label": "Ops Fabric",
           "url": "https://international.bt.com/platforms/ops-fabric",
-          "hint": "Managed operations across BT’s connectivity, voice, and security domains."
+          "hint": "Managed operations across BT\u2019s connectivity, voice, and security domains."
         },
-        "story": [
-          { "step": "See", "text": "Observability across network, overlay, security, and voice." },
-          { "step": "Act", "text": "AI-assisted insight and auto-remediation." },
-          { "step": "Run", "text": "Operational hubs and domain experts behind the tooling." },
-          { "step": "Outcome", "text": "One operating model instead of three NOCs." }
-        ]
+        "fits": "Operates Global Fabric, Global Voice, and the security edge as one model."
       }
     }
   ]
