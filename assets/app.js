@@ -1,4 +1,4 @@
-import { createGraph } from "./graph.js?v=0.2.3";
+import { createGraph } from "./graph.js?v=0.2.4";
 import { createPanel } from "./panel.js";
 import { createSolutionsApi } from "./solutions.js";
 import { createSolutionsUI } from "./solutions-ui.js";
@@ -760,6 +760,23 @@ function sellerSky() {
   return `<div class="seller-sky" aria-hidden="true"><span class="orb orb-a"></span><span class="orb orb-b"></span><span class="orb orb-c"></span></div>`;
 }
 
+function deviceBridge() {
+  const names = state.families.find((f) => f.id === "collab-devices")?.seller?.joins || [
+    "Microsoft Teams",
+    "Zoom",
+    "Google Meet",
+  ];
+  return `
+    <div class="device-bridge">
+      <button type="button" class="partner cisco gap" data-kind="family" data-id="collab-devices">Cisco devices</button>
+      <span class="arch-dash" aria-hidden="true"></span>
+      <div class="meet-fan">
+        <span class="arch-k">Also joins</span>
+        ${names.map((name) => `<span class="partner meet">${esc(name)}</span>`).join("")}
+      </div>
+    </div>`;
+}
+
 function archNode(id, label, extra = "") {
   return `<button type="button" class="arch-node ${extra}" data-kind="family" data-id="${esc(id)}">${esc(label)}</button>`;
 }
@@ -800,11 +817,10 @@ function architectureDiagram() {
         </div>
         <div class="arch-partners">
           <button type="button" class="partner cisco" data-kind="family" data-id="webex-calling">Webex</button>
-          <span class="arch-dash" aria-hidden="true"></span>
-          <button type="button" class="partner cisco gap" data-kind="family" data-id="collab-devices">Cisco devices</button>
           <span class="partner quiet">Microsoft Teams</span>
           <span class="partner quiet">Zoom</span>
         </div>
+        ${deviceBridge()}
       </div>
       <div class="arch-band arch-wrap">
         ${archNode("ops-fabric", "Ops Fabric — operates network, voice, and security", "arch-core")}
@@ -913,6 +929,7 @@ function renderTopicPage(id) {
       <h1>${esc(f.name)}</h1>
       <p class="seller-line">${esc(seller.sentence || f.desc)}</p>
       ${seller.fits ? `<p class="seller-fits">${esc(seller.fits)}</p>` : ""}
+      ${(seller.joins || []).length ? deviceBridge() : ""}
       ${stats}
       <div class="seller-actions">
         ${

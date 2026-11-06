@@ -202,7 +202,8 @@
       "gap": true,
       "desc": "Cisco rooms, boards, desks, and phones — the endpoint layer missing from BT’s public collaboration story.",
       "seller": {
-        "sentence": "Rooms, boards, desks, and phones are where Webex Calling and Meetings land in the building.",
+        "sentence": "Rooms, boards, desks, and phones join Webex. The same Cisco device also joins Microsoft Teams, Zoom, and Google Meet.",
+        "joins": ["Microsoft Teams", "Zoom", "Google Meet"],
         "next": {
           "label": "Cisco Collaboration Devices",
           "url": "https://www.cisco.com/c/en/us/products/collaboration-endpoints/index.html",
