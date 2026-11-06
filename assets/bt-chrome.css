@@ -1169,7 +1169,7 @@ body.seller .sw { width: 240px; }
   0%, 18%, 100% { box-shadow: 0 0 0 0 transparent; }
   8% { box-shadow: 0 0 0 6px color-mix(in srgb, var(--tone) 28%, transparent); color: #fff; }
 }
-.seller-actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.seller-actions { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; margin-top: 28px; }
 .seller-next {
   display: inline-flex;
   align-items: center;
@@ -1330,19 +1330,29 @@ button.arch-node, button.partner { cursor: pointer; }
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 8px;
-  margin-top: 12px;
-  padding-top: 12px;
+  gap: 16px;
+  margin-top: 18px;
+  padding-top: 18px;
   border-top: 1px dashed rgba(196, 181, 253, 0.45);
 }
-.meet-fan { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.meet-fan { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
 .device-bridge .arch-k,
 .meet-fan .arch-k { margin: 0; }
+.join-board {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+  margin: 28px 0 8px;
+}
+.join-board .arch-k { margin: 0; }
+.join-board .meet-fan { gap: 14px; }
 .partner.meet {
   color: #d1d1d6;
   background: transparent;
   border-style: dashed;
   border-color: rgba(255, 255, 255, 0.28);
+  padding: 10px 16px;
 }
 .partner.quiet {
   color: #aeaeb2;

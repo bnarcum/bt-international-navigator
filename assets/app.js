@@ -1,4 +1,4 @@
-import { createGraph } from "./graph.js?v=0.2.4";
+import { createGraph } from "./graph.js?v=0.2.5";
 import { createPanel } from "./panel.js";
 import { createSolutionsApi } from "./solutions.js";
 import { createSolutionsUI } from "./solutions-ui.js";
@@ -760,19 +760,27 @@ function sellerSky() {
   return `<div class="seller-sky" aria-hidden="true"><span class="orb orb-a"></span><span class="orb orb-b"></span><span class="orb orb-c"></span></div>`;
 }
 
-function deviceBridge() {
+function deviceBridge(place) {
   const names = state.families.find((f) => f.id === "collab-devices")?.seller?.joins || [
     "Microsoft Teams",
     "Zoom",
     "Google Meet",
   ];
+  const chips = names.map((name) => `<span class="partner meet">${esc(name)}</span>`).join("");
+  if (place === "topic") {
+    return `
+      <div class="join-board">
+        <p class="arch-k">Also joins</p>
+        <div class="meet-fan">${chips}</div>
+      </div>`;
+  }
   return `
     <div class="device-bridge">
       <button type="button" class="partner cisco gap" data-kind="family" data-id="collab-devices">Cisco devices</button>
       <span class="arch-dash" aria-hidden="true"></span>
       <div class="meet-fan">
         <span class="arch-k">Also joins</span>
-        ${names.map((name) => `<span class="partner meet">${esc(name)}</span>`).join("")}
+        ${chips}
       </div>
     </div>`;
 }
@@ -929,7 +937,7 @@ function renderTopicPage(id) {
       <h1>${esc(f.name)}</h1>
       <p class="seller-line">${esc(seller.sentence || f.desc)}</p>
       ${seller.fits ? `<p class="seller-fits">${esc(seller.fits)}</p>` : ""}
-      ${(seller.joins || []).length ? deviceBridge() : ""}
+      ${(seller.joins || []).length ? deviceBridge("topic") : ""}
       ${stats}
       <div class="seller-actions">
         ${
