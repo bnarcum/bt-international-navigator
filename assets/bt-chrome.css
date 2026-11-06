@@ -24,10 +24,21 @@
   padding: 0;
 }
 
-.wm-logo { display: block; height: 28px; width: 28px; }
+.wm-logo {
+  display: block;
+  height: 28px;
+  width: 28px;
+  filter: brightness(0) invert(1);
+}
 .wm-mark { font-size: 13px; font-weight: 700; letter-spacing: 0.14em; }
 .wm-prod { font-size: 12px; font-weight: 400; letter-spacing: 0; color: #a1a1a6; }
-.brand-lockup { display: block; height: 96px; width: auto; margin: 0 0 22px; }
+.brand-lockup {
+  display: block;
+  height: 112px;
+  width: auto;
+  margin: 0 0 22px;
+  filter: brightness(0) invert(1);
+}
 .wm-text, .wm-name { display: none; }
 
 .site-nav { display: flex; gap: 22px; }
