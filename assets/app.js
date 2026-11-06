@@ -1,4 +1,4 @@
-import { createGraph } from "./graph.js?v=0.2.6";
+import { createGraph } from "./graph.js?v=0.2.7";
 import { createPanel } from "./panel.js";
 import { createSolutionsApi } from "./solutions.js";
 import { createSolutionsUI } from "./solutions-ui.js";
@@ -725,32 +725,33 @@ function sellerTrail() {
 
 function portfolioArt(id) {
   const arts = {
-    connectivity: `<svg class="art" viewBox="0 0 200 150" aria-hidden="true">
-      <circle class="glow" cx="100" cy="78" r="58"/>
-      <g fill="none" stroke="currentColor" stroke-width="1.6">
-        <path class="dash" d="M36 110 C70 36, 130 36, 164 110"/>
-        <path class="dash" d="M44 46 C92 96, 112 34, 160 74"/>
+    connectivity: `<svg class="art" viewBox="0 0 160 160" aria-hidden="true">
+      <circle class="glow" cx="80" cy="80" r="62"/>
+      <circle cx="80" cy="80" r="50" fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.28"/>
+      <g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+        <path class="dash" d="M50 98 C64 52, 98 46, 114 72"/>
+        <path class="dash" d="M46 74 C74 90, 96 58, 118 106"/>
       </g>
       <g fill="currentColor">
-        <circle cx="36" cy="110" r="5"/><circle cx="164" cy="110" r="5"/>
-        <circle class="pulse" cx="100" cy="56" r="7"/><circle cx="160" cy="74" r="5"/>
+        <circle cx="50" cy="98" r="5"/><circle cx="114" cy="72" r="5"/>
+        <circle class="pulse" cx="80" cy="56" r="6.5"/><circle cx="118" cy="106" r="4.5"/><circle cx="46" cy="74" r="4"/>
       </g>
     </svg>`,
-    collaboration: `<svg class="art" viewBox="0 0 200 150" aria-hidden="true">
-      <circle class="glow" cx="100" cy="78" r="58"/>
+    collaboration: `<svg class="art" viewBox="0 0 160 160" aria-hidden="true">
+      <circle class="glow" cx="80" cy="80" r="62"/>
       <g class="spin" fill="none" stroke="currentColor" stroke-width="1.6">
-        <circle cx="74" cy="66" r="18"/><circle cx="126" cy="66" r="18"/><circle cx="100" cy="104" r="18"/>
-        <path d="M88 76 L96 94 M112 76 L104 94" opacity=".8"/>
+        <circle cx="56" cy="66" r="15"/><circle cx="104" cy="66" r="15"/><circle cx="80" cy="104" r="15"/>
+        <path d="M68 76 L76 92 M92 76 L84 92" opacity=".8"/>
       </g>
-      <circle class="pulse" cx="74" cy="66" r="4" fill="currentColor"/>
-      <circle class="pulse" cx="126" cy="66" r="4" fill="currentColor"/>
-      <circle class="pulse" cx="100" cy="104" r="4" fill="currentColor"/>
+      <circle class="pulse" cx="56" cy="66" r="4" fill="currentColor"/>
+      <circle class="pulse" cx="104" cy="66" r="4" fill="currentColor"/>
+      <circle class="pulse" cx="80" cy="104" r="4" fill="currentColor"/>
     </svg>`,
-    managed: `<svg class="art" viewBox="0 0 200 150" aria-hidden="true">
-      <circle class="glow" cx="100" cy="76" r="58"/>
-      <circle class="spin ring" cx="100" cy="76" r="42" fill="none" stroke="currentColor" stroke-width="1.2" stroke-dasharray="8 10"/>
-      <path fill="currentColor" d="M100 40 l28 10 v22 c0 18-12 30-28 36-16-6-28-18-28-36 V50 z" opacity=".9"/>
-      <path class="pulse" fill="none" stroke="#050507" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M88 76 l8 8 16-18"/>
+    managed: `<svg class="art" viewBox="0 0 160 160" aria-hidden="true">
+      <circle class="glow" cx="80" cy="80" r="62"/>
+      <circle class="spin ring" cx="80" cy="80" r="50" fill="none" stroke="currentColor" stroke-width="1.4" stroke-dasharray="4 7" opacity="0.75"/>
+      <path fill="currentColor" d="M80 44 l24 9 v18 c0 16-10 28-24 34-14-6-24-18-24-34 V53 z"/>
+      <path fill="none" stroke="#0c0c10" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" d="M70 80 l7 8 14-16"/>
     </svg>`,
   };
   return arts[id] || arts.connectivity;

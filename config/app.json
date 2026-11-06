@@ -31,7 +31,7 @@
     {
       "id": "connectivity",
       "name": "Secure Connectivity",
-      "line": "Global Fabric, dedicated internet, SD-WAN, and SASE.",
+      "line": "Global Fabric, dedicated internet, SD\u2011WAN, and SASE.",
       "aliases": ["global fabric", "dia", "icr", "sd-wan", "sase", "sse", "internet"],
       "families": ["global-fabric", "dia", "icr", "sdwan", "sase"]
     },
