@@ -14,8 +14,8 @@
 
 #solutions-panel {
   width: min(840px, 100%);
-  background: #fff;
-  color: #1d1d1f;
+  background: #1d1d1f;
+  color: #f5f5f7;
   border-radius: 22px;
   max-height: calc(100vh - 96px);
   display: flex;
@@ -32,8 +32,8 @@
   height: 30px;
   border: none;
   border-radius: 50%;
-  background: #f3eef8;
-  color: #1d1d1f;
+  background: #2c2c2e;
+  color: #f5f5f7;
   cursor: pointer;
 }
 
@@ -75,8 +75,8 @@
   text-align: left;
   font: inherit;
   color: inherit;
-  background: #fff;
-  border: 1px solid rgba(85, 20, 180, 0.14);
+  background: #2c2c2e;
+  border: none;
   border-radius: 18px;
   padding: 0;
   cursor: pointer;
