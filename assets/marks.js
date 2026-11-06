@@ -12,8 +12,8 @@ export const MARK_STROKE = {
 
 export function markSvg(pillar, size = 22) {
   const d = MARK_PATH[pillar] || MARK_PATH.connectivity;
-  const stroke = MARK_STROKE[pillar]
-    ? ` fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" stroke-linecap="round"`
-    : "";
-  return `<svg class="mark m-${pillar}" width="${size}" height="${size}" viewBox="0 0 24 24" aria-hidden="true"><path d="${d}"${stroke}></path></svg>`;
+  const paint = MARK_STROKE[pillar]
+    ? ` fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"`
+    : ` fill="currentColor"`;
+  return `<svg class="mark m-${pillar}" width="${size}" height="${size}" viewBox="0 0 24 24" aria-hidden="true"><path d="${d}"${paint}></path></svg>`;
 }

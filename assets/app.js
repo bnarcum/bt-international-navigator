@@ -1,4 +1,4 @@
-import { createGraph } from "./graph.js?v=0.2.10";
+import { createGraph } from "./graph.js?v=0.2.11";
 import { createPanel } from "./panel.js";
 import { createSolutionsApi } from "./solutions.js";
 import { createSolutionsUI } from "./solutions-ui.js";
@@ -14,8 +14,8 @@ import {
   oemProductsOn,
   productsOn,
   renderEdge,
-} from "./hood.js?v=0.2.10";
-import { markSvg } from "./marks.js";
+} from "./hood.js?v=0.2.11";
+import { markSvg } from "./marks.js?v=0.2.11";
 
 const BUILD = "0.1.0";
 
@@ -398,7 +398,7 @@ function canvasHint() {
       : "Pick a domain on the right — or click a token.";
   }
   if (kind === "practice") return `You are in ${pn(id)}. Open a product next.`;
-  if (kind === "family") return "Next step is on the right. Hover a walk to light it on the map.";
+  if (kind === "family") return "Next step is on the right. Hover a card to light it on the map.";
   if (kind === "solution") return "Open a product to walk the stack.";
   if (kind === "outcome") return "Pick an offering to continue.";
   if (kind === "product") return "Open a product on the right — or click its token on the map.";

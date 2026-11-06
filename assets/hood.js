@@ -235,9 +235,9 @@ export function renderEdge(e, practiceNameFn, markFn, focus) {
     <button type="button" class="walk-step${cross ? " cross" : ""}${gap ? " gap" : ""}" data-kind="family" data-id="${dest.id}">
       <span class="ws-because">${e.label || "connects"}</span>
       <span class="ws-pair">
-        <span class="ws-end">${mark(dest.pillar)}${dest.name}</span>
+        <span class="ws-end"><span class="ws-mark m-${dest.pillar}">${mark(dest.pillar, 16)}</span>${dest.name}</span>
       </span>
       ${cross ? `<span class="ws-cross">Leaves ${practiceNameFn(fromPractice)}</span>` : ""}
-      <span class="ws-go">Walk there</span>
+      <span class="ws-go">View details</span>
     </button>`;
 }
