@@ -1,4 +1,4 @@
-import { createGraph } from "./graph.js?v=0.2.11";
+import { createGraph } from "./graph.js?v=0.2.12";
 import { createPanel } from "./panel.js";
 import { createSolutionsApi } from "./solutions.js";
 import { createSolutionsUI } from "./solutions-ui.js";
@@ -14,8 +14,8 @@ import {
   oemProductsOn,
   productsOn,
   renderEdge,
-} from "./hood.js?v=0.2.11";
-import { markSvg } from "./marks.js?v=0.2.11";
+} from "./hood.js?v=0.2.12";
+import { markSvg } from "./marks.js?v=0.2.12";
 
 const BUILD = "0.1.0";
 
@@ -437,9 +437,20 @@ function youAre(title, lede, pillar) {
     </div>`;
 }
 
+function officialDest(url) {
+  const host = linkHost(url);
+  if (host === "international.bt.com") return "Official BT International site";
+  if (host.endsWith("cisco.com") || host.endsWith("webex.com")) return "Official Cisco site";
+  return host ? `Opens ${host}` : "Opens in a new tab";
+}
+
 function outLink(url, label) {
   if (!url) return "";
-  return `<a class="text-link hood-out" href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(label || "Open")}</a>`;
+  return `<a class="hood-leave" href="${esc(url)}" target="_blank" rel="noopener noreferrer">
+    <span class="hood-leave-k">Leaves this navigator</span>
+    <span class="hood-leave-name">${esc(label || officialDest(url))}</span>
+    <span class="hood-leave-host">${esc(officialDest(url))}</span>
+  </a>`;
 }
 
 function familyDetail(family) {
@@ -621,7 +632,7 @@ function renderHood() {
         ${renderTrail()}
         ${youAre(h.solution.name, h.solution.why || h.solution.lede || h.solution.desc, h.solution.pillar)}
         ${section("Next step", `<div class="hood-list">${h.fams.map((f) => btn("family", f.id, f.name, f.seller?.sentence || f.desc, f.pillar)).join("")}</div>`)}
-        ${outLink(h.solution.url, "Open on BT International")}`;
+        ${outLink(h.solution.url, h.solution.name)}`;
     }
   } else if (kind === "outcome") {
     const h = hoodForOutcome(state, id);
@@ -667,7 +678,7 @@ function renderHood() {
         ${youAre(h.product.name, h.product.why, h.fams[0]?.pillar || "")}
         ${section("Next step", `<div class="hood-list">${h.fams.map((f) => btn("family", f.id, f.name, f.seller?.sentence || f.desc, f.pillar)).join("")}</div>`)}
         ${skuSection(h.skus)}
-        ${outLink(h.product.url, h.product.url.includes("international.bt.com") ? "Open on BT International" : "View on Cisco")}`;
+        ${outLink(h.product.url, h.product.name)}`;
     }
   }
 
@@ -957,7 +968,7 @@ function renderTopicPage(id) {
       <div class="seller-actions">
         ${
           next
-            ? `<a class="seller-next" href="${esc(next.url)}" target="_blank" rel="noopener noreferrer">${esc(next.label)}</a>`
+            ? `<a class="seller-next" href="${esc(next.url)}" target="_blank" rel="noopener noreferrer"><span>${esc(next.label)}</span><span class="seller-next-sub">Leaves this navigator · ${esc(officialDest(next.url))}</span></a>`
             : ""
         }
         <button type="button" class="seller-map" data-kind="family" data-id="${esc(f.id)}" data-map="1">See how it connects</button>
