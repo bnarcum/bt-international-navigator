@@ -1,4 +1,4 @@
-import { createGraph } from "./graph.js?v=0.2.1";
+import { createGraph } from "./graph.js?v=0.2.2";
 import { createPanel } from "./panel.js";
 import { createSolutionsApi } from "./solutions.js";
 import { createSolutionsUI } from "./solutions-ui.js";
@@ -723,6 +723,43 @@ function sellerTrail() {
   </nav>`;
 }
 
+function portfolioArt(id) {
+  const arts = {
+    connectivity: `<svg class="art" viewBox="0 0 200 150" aria-hidden="true">
+      <circle class="glow" cx="100" cy="78" r="58"/>
+      <g fill="none" stroke="currentColor" stroke-width="1.6">
+        <path class="dash" d="M36 110 C70 36, 130 36, 164 110"/>
+        <path class="dash" d="M44 46 C92 96, 112 34, 160 74"/>
+      </g>
+      <g fill="currentColor">
+        <circle cx="36" cy="110" r="5"/><circle cx="164" cy="110" r="5"/>
+        <circle class="pulse" cx="100" cy="56" r="7"/><circle cx="160" cy="74" r="5"/>
+      </g>
+    </svg>`,
+    collaboration: `<svg class="art" viewBox="0 0 200 150" aria-hidden="true">
+      <circle class="glow" cx="100" cy="78" r="58"/>
+      <g class="spin" fill="none" stroke="currentColor" stroke-width="1.6">
+        <circle cx="74" cy="66" r="18"/><circle cx="126" cy="66" r="18"/><circle cx="100" cy="104" r="18"/>
+        <path d="M88 76 L96 94 M112 76 L104 94" opacity=".8"/>
+      </g>
+      <circle class="pulse" cx="74" cy="66" r="4" fill="currentColor"/>
+      <circle class="pulse" cx="126" cy="66" r="4" fill="currentColor"/>
+      <circle class="pulse" cx="100" cy="104" r="4" fill="currentColor"/>
+    </svg>`,
+    managed: `<svg class="art" viewBox="0 0 200 150" aria-hidden="true">
+      <circle class="glow" cx="100" cy="76" r="58"/>
+      <circle class="spin ring" cx="100" cy="76" r="42" fill="none" stroke="currentColor" stroke-width="1.2" stroke-dasharray="8 10"/>
+      <path fill="currentColor" d="M100 40 l28 10 v22 c0 18-12 30-28 36-16-6-28-18-28-36 V50 z" opacity=".9"/>
+      <path class="pulse" fill="none" stroke="#050507" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M88 76 l8 8 16-18"/>
+    </svg>`,
+  };
+  return arts[id] || arts.connectivity;
+}
+
+function sellerSky() {
+  return `<div class="seller-sky" aria-hidden="true"><span class="orb orb-a"></span><span class="orb orb-b"></span><span class="orb orb-c"></span></div>`;
+}
+
 function archNode(id, label, extra = "") {
   return `<button type="button" class="arch-node ${extra}" data-kind="family" data-id="${esc(id)}">${esc(label)}</button>`;
 }
@@ -780,6 +817,7 @@ function renderSellerHome() {
         .map(
           (p, i) => `
           <button type="button" class="port-card tone-${esc(p.id)}" style="--i:${i}" data-kind="portfolio" data-id="${esc(p.id)}">
+            <span class="port-art">${portfolioArt(p.id)}</span>
             <span class="port-copy">
               <strong>${esc(p.name)}</strong>
               <span class="port-line">${esc(p.line)}</span>
@@ -789,12 +827,13 @@ function renderSellerHome() {
         .join("")
     : `<p class="seller-line">The portfolio list did not load. Hard-refresh this page.</p>`;
   return `
+    ${sellerSky()}
     <div class="seller-wrap seller-home">
-      <img class="brand-lockup" src="assets/brand/bt-international-logo.png" alt="BT International" width="220" height="197">
-      <h1>How the products connect.</h1>
-      ${architectureDiagram()}
-      <h2 class="arch-next">Or start from a domain</h2>
+      <p class="hood-kicker">Where do you start?</p>
+      <h1>Choose one.</h1>
       <div class="port-grid">${list}</div>
+      <h2>How the products connect</h2>
+      ${architectureDiagram()}
       <p class="seller-foot">${esc(state.config.disclaimer || "")}</p>
     </div>`;
 }
@@ -802,6 +841,7 @@ function renderSellerHome() {
 function renderPortfolioPage(port) {
   const topics = (port.families || []).map((fid) => state.families.find((f) => f.id === fid)).filter(Boolean);
   return `
+    ${sellerSky()}
     <div class="seller-wrap tone-${esc(port.id)}">
       <div class="folio-hero">
         <div>
@@ -809,6 +849,7 @@ function renderPortfolioPage(port) {
           <h1>${esc(port.name)}</h1>
           <p class="seller-line">${esc(port.line)}</p>
         </div>
+        <div class="folio-art">${portfolioArt(port.id)}</div>
       </div>
       <div class="topic-list">
         ${topics
@@ -862,6 +903,7 @@ function renderTopicPage(id) {
         .join("")}</ul>`
     : "";
   return `
+    ${sellerSky()}
     <div class="seller-wrap tone-${esc(port?.id || "connectivity")}">
       ${sellerTrail()}
       ${state.sellerCue ? `<p class="seller-cue">For ${esc(state.sellerCue)}</p>` : ""}
