@@ -14,6 +14,7 @@
           "hint": "NaaS platform page \u2014 footprint, demos, and how sites connect."
         },
         "fits": "DIA and Internet Connect Reach feed it. SD-WAN and SASE sit on it. Ops Fabric runs it.",
+        "parts": ["Port and access diversity", "Real-time scale", "Pre-integrated data centres"],
         "proof": [
           {
             "n": "180+",
@@ -47,7 +48,8 @@
           "url": "https://international.bt.com/products-services/secure-connectivity/direct-internet-access",
           "hint": "Dedicated internet, Global Fabric Business Internet, and ICR."
         },
-        "fits": "Dedicated access under Global Fabric Business Internet and under SD-WAN."
+        "fits": "Dedicated access under Global Fabric Business Internet and under SD-WAN.",
+        "parts": ["Uncontended bandwidth", "Global Fabric Business Internet", "DDoS and cloud firewall"]
       }
     },
     {
@@ -79,7 +81,8 @@
           "url": "https://international.bt.com/products-services/secure-connectivity/software-defined-networking",
           "hint": "Managed SD-WAN, SASE, and multi-vendor support."
         },
-        "fits": "Rides DIA and Global Fabric. It is the network half of SASE. Cisco is one overlay."
+        "fits": "Rides DIA and Global Fabric. It is the network half of SASE. Cisco is one overlay.",
+        "parts": ["Landline", "Broadband", "4G and 5G"]
       }
     },
     {
@@ -111,7 +114,14 @@
           "url": "https://international.bt.com/platforms/global-voice",
           "hint": "Global SIP, inbound contact, and UC Edge."
         },
-        "fits": "The PSTN and SIP layer under Webex Calling, One Cloud Cisco, and UC Edge."
+        "fits": "The PSTN and SIP layer under Webex Calling, One Cloud Cisco, and UC Edge.",
+        "parts": ["Global SIP", "Inbound Contact", "UC Edge"],
+        "proof": [
+          { "n": "170+", "l": "countries" },
+          { "n": "5 million", "l": "voice numbers" },
+          { "n": "10 billion", "l": "minutes a year" },
+          { "n": "27", "l": "full PSTN countries" }
+        ]
       }
     },
     {
@@ -159,7 +169,8 @@
           "url": "https://international.bt.com/products-services/voice-collaboration-CX/cloud-collaboration-tools",
           "hint": "One Cloud Cisco \u2014 hosted Cisco voice and collaboration."
         },
-        "fits": "Cisco collaboration hosted in BT data centres, still on Global Voice."
+        "fits": "Cisco collaboration hosted in BT data centres, still on Global Voice.",
+        "parts": ["BT data centres", "Per user per month"]
       }
     },
     {
@@ -209,7 +220,8 @@
           "url": "https://www.cisco.com/c/en/us/products/collaboration-endpoints/index.html",
           "hint": "Cisco’s public devices page. BT’s marketing page does not name this product."
         },
-        "fits": "Not named on BT’s public collaboration page. The Webex Meetings schedule already registers Room Kit, Board, and Desk, and that page only says devices under Microsoft Teams."
+        "fits": "Not named on BT’s public collaboration page. The Webex Meetings schedule already registers these devices, and that page only says devices under Microsoft Teams.",
+        "parts": ["Room Kit", "Board", "Desk series"]
       }
     },
     {
@@ -225,7 +237,8 @@
           "url": "https://international.bt.com/platforms/ops-fabric",
           "hint": "Managed operations across BT\u2019s connectivity, voice, and security domains."
         },
-        "fits": "Operates Global Fabric, Global Voice, and the security edge as one model."
+        "fits": "Operates Global Fabric, Global Voice, and the security edge as one model.",
+        "parts": ["Connectivity and infrastructure", "Global Voice", "Network security"]
       }
     }
   ]

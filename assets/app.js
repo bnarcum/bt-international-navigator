@@ -1,4 +1,4 @@
-import { createGraph } from "./graph.js?v=0.2.5";
+import { createGraph } from "./graph.js?v=0.2.6";
 import { createPanel } from "./panel.js";
 import { createSolutionsApi } from "./solutions.js";
 import { createSolutionsUI } from "./solutions-ui.js";
@@ -904,6 +904,7 @@ function renderTopicPage(id) {
   const port = portfolioForFamily(f.id);
   const quiet = QUIET_PARTNERS[f.id] || [];
   const proof = seller.proof || [];
+  const parts = seller.parts || [];
   const sell = cisco.length
     ? `<h2>Cisco</h2><div class="sell-grid">${cisco
         .map((p) => {
@@ -923,6 +924,9 @@ function renderTopicPage(id) {
         .map((name) => `<span class="partner quiet">${esc(name)}</span>`)
         .join("")}</div>`
     : "";
+  const includes = parts.length
+    ? `<p class="arch-k part-k">Includes</p><ul class="part-list">${parts.map((p) => `<li>${esc(p)}</li>`).join("")}</ul>`
+    : "";
   const stats = proof.length
     ? `<ul class="proof-stats">${proof
         .map((p) => `<li><b>${esc(p.n)}</b><span>${esc(p.l)}</span></li>`)
@@ -937,6 +941,7 @@ function renderTopicPage(id) {
       <h1>${esc(f.name)}</h1>
       <p class="seller-line">${esc(seller.sentence || f.desc)}</p>
       ${seller.fits ? `<p class="seller-fits">${esc(seller.fits)}</p>` : ""}
+      ${includes}
       ${(seller.joins || []).length ? deviceBridge("topic") : ""}
       ${stats}
       <div class="seller-actions">
