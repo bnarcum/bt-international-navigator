@@ -1,4 +1,4 @@
-import { createGraph } from "./graph.js?v=0.2.18";
+import { createGraph } from "./graph.js?v=0.2.19";
 import { createPanel } from "./panel.js";
 import { createSolutionsApi } from "./solutions.js";
 import { createSolutionsUI } from "./solutions-ui.js";
@@ -14,8 +14,8 @@ import {
   oemProductsOn,
   productsOn,
   renderEdge,
-} from "./hood.js?v=0.2.18";
-import { markSvg } from "./marks.js?v=0.2.18";
+} from "./hood.js?v=0.2.19";
+import { markSvg } from "./marks.js?v=0.2.19";
 
 const BUILD = "0.1.0";
 
@@ -917,7 +917,9 @@ function renderStoryHome() {
   const bridge = story.bridge;
   return `
     <div class="deck-home">
+      <p class="deck-kicker">How BT International carries it</p>
       <p class="deck-headline">${esc(story.headline || "")}</p>
+      <p class="deck-lede">Click a pillar, or the line between them.</p>
       <div class="deck-board">
         <div class="deck-top">${tops.map((c) => deckBar(c, marks)).join("")}</div>
         ${
@@ -981,7 +983,7 @@ function renderStoryPage(id) {
   const join = btByCisco(page);
   const hasBt = (page.groups || []).length > 0;
   const lens = !hasBt || state.storyLens === "cisco" ? "cisco" : "bt";
-  const extras = (lens === "bt" ? page.groups || [] : [])
+  const extras = (page.groups || [])
     .filter((g) => !(g.cisco || []).length)
     .map((g) => {
       const family = state.families.find((f) => f.id === g.family);
@@ -1001,9 +1003,9 @@ function renderStoryPage(id) {
           ? `<a class="pillar-hit" href="${esc(url)}" target="_blank" rel="noopener noreferrer">${face}</a>`
           : `<div class="pillar-hit">${face}</div>`;
       return `<div class="pillar-node${dim ? " is-dim" : ""}">${hit}${
-        family && lens === "bt" && !item.btOnly
+        family && !item.btOnly
           ? `<button type="button" class="pillar-bt" data-kind="family" data-id="${esc(family.id)}">${esc(family.name)}</button>`
-          : ""
+          : `<span class="pillar-bt is-empty" aria-hidden="true"></span>`
       }</div>`;
     })
     .join("");
@@ -1025,7 +1027,8 @@ function renderStoryPage(id) {
               : ""
           }
         </div>
-        ${meta.promise ? `<div class="pillar-promise"><span>${esc(meta.promise)}</span>${meta.bt ? `<span class="pillar-btline">BT · ${esc(meta.bt)}</span>` : ""}</div>` : ""}
+        ${meta.promise ? `<div class="pillar-promise"><span>${esc(meta.promise)}</span>${meta.bt ? `<span class="pillar-btline">BT · ${esc(meta.bt)}</span>` : `<span class="pillar-btline">BT does not package this pillar.</span>`}</div>` : ""}
+        <p class="pillar-hint">${hasBt ? "A circle opens that family on the Portfolio Navigator. A blue name opens the BT offer and stays here." : "Each circle opens that family on the Portfolio Navigator."}</p>
         <div class="pillar-grid cols-${cols}" style="--cols:${cols}">${nodes}</div>
         ${cards ? `<div class="pillar-ribbon">${cards}</div>` : ""}
       </div>
@@ -1162,7 +1165,7 @@ function showSeller() {
   syncChrome();
   syncTopbarHeight();
   const mapBtn = document.getElementById("map-btn");
-  if (mapBtn) mapBtn.textContent = "See how it connects";
+  if (mapBtn) mapBtn.textContent = "BT map";
 }
 
 function showMap() {
@@ -1172,7 +1175,7 @@ function showMap() {
   if (seller) seller.hidden = true;
   setViewMode();
   const mapBtn = document.getElementById("map-btn");
-  if (mapBtn) mapBtn.textContent = "Back to the list";
+  if (mapBtn) mapBtn.textContent = "Back to the story";
   if (state.focus.kind === "family") graph?.focusNode(state.focus.id);
 }
 
@@ -1310,6 +1313,22 @@ function bindSearch() {
     for (const p of state.config.portfolios || []) {
       const hay = `${p.name} ${(p.aliases || []).join(" ")} ${p.line}`.toLowerCase();
       if (p.name.toLowerCase() === q || hay.includes(q)) push({ type: "Portfolio", name: p.name, id: p.id, kind: "portfolio", rank: p.name.toLowerCase() === q ? 100 : 50 });
+    }
+    for (const card of state.oneCisco?.cards || []) {
+      const hay = `${card.label} ${card.promise || ""} ${card.bt || ""}`.toLowerCase();
+      if (hay.includes(q)) push({ type: "One Cisco", name: card.label, id: card.id, kind: "story", rank: card.label.toLowerCase().includes(q) ? 85 : 60 });
+    }
+    if (state.oneCisco?.bridge) {
+      const bridge = state.oneCisco.bridge;
+      const hay = `${bridge.label} ${bridge.bt || ""}`.toLowerCase();
+      if (hay.includes(q)) push({ type: "One Cisco", name: bridge.label, id: bridge.id, kind: "story", rank: 80 });
+    }
+    for (const [pid, page] of Object.entries(state.oneCisco?.pages || {})) {
+      for (const item of page.board || []) {
+        if (`${item.name} ${item.id}`.toLowerCase().includes(q)) {
+          push({ type: "One Cisco", name: item.name, id: pid, kind: "story", rank: 70 });
+        }
+      }
     }
     for (const f of state.families) {
       const hay = `${f.name} ${f.desc} ${f.seller?.sentence || ""}`.toLowerCase();

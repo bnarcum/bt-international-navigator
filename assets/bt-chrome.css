@@ -1468,15 +1468,26 @@ button.arch-node, button.partner { cursor: pointer; }
   margin: 0 auto;
   padding: 28px 0 36px;
 }
+.deck-kicker {
+  margin: 0 0 8px;
+  text-align: center;
+  color: #7eeaff;
+  font-size: 12px;
+  font-weight: 650;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
 .deck-headline {
   max-width: 38rem;
-  margin: 0 0 28px;
+  margin: 0 0 10px;
   text-align: center;
   color: #f4fbff;
   font-size: 20px;
   line-height: 1.35;
   font-weight: 500;
 }
+.deck-lede { margin: 0 0 22px; text-align: center; color: #c7c7cc; font-size: 15px; }
+.pillar-hint { margin: 10px 8px 0; text-align: center; color: #c7c7cc; font-size: 13px; line-height: 1.4; }
 .deck-board {
   position: relative;
   width: min(736px, 100%);
@@ -1637,7 +1648,7 @@ button.arch-node, button.partner { cursor: pointer; }
   gap: 26px 6px;
   margin: 22px 4px 8px;
 }
-.pillar-node { position: relative; min-width: 0; }
+.pillar-node { position: relative; min-width: 0; display: flex; flex-direction: column; align-items: center; }
 .pillar-grid.cols-6 .pillar-node:not(:nth-child(6n))::before,
 .pillar-grid.cols-4 .pillar-node:not(:nth-child(4n))::before {
   content: "";
@@ -1684,7 +1695,8 @@ button.arch-node, button.partner { cursor: pointer; }
 .pillar-board.tone-link .pillar-orb { color: #d7f6ff; border-color: #02c8ff; box-shadow: 0 0 14px rgba(2, 200, 255, 0.28); background: radial-gradient(circle at 50% 40%, rgba(0, 80, 110, 0.25), rgba(4, 14, 20, 0.92)); }
 .pillar-orb svg { width: 22px; height: 22px; }
 .pillar-label { color: #f5f5f7; font-size: 11px; line-height: 1.25; font-weight: 600; max-width: 12ch; }
-.pillar-bt { margin-top: 2px; background: none; border: none; color: #7eeaff; font: inherit; font-size: 11px; font-weight: 700; cursor: pointer; }
+.pillar-bt { margin-top: 2px; min-height: 16px; background: none; border: none; color: #7eeaff; font: inherit; font-size: 11px; font-weight: 700; cursor: pointer; }
+.pillar-bt.is-empty { cursor: default; }
 .pillar-node.is-dim { opacity: 0.28; }
 .pillar-ribbon { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-top: 18px; }
 .pillar-card { text-align: left; background: rgba(0, 0, 0, 0.28); border: 1px solid rgba(255, 255, 255, 0.16); border-radius: 10px; padding: 12px 12px 14px; }
