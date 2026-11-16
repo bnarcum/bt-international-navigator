@@ -1,4 +1,4 @@
-import { createGraph } from "./graph.js?v=0.2.17";
+import { createGraph } from "./graph.js?v=0.2.18";
 import { createPanel } from "./panel.js";
 import { createSolutionsApi } from "./solutions.js";
 import { createSolutionsUI } from "./solutions-ui.js";
@@ -14,8 +14,8 @@ import {
   oemProductsOn,
   productsOn,
   renderEdge,
-} from "./hood.js?v=0.2.17";
-import { markSvg } from "./marks.js?v=0.2.17";
+} from "./hood.js?v=0.2.18";
+import { markSvg } from "./marks.js?v=0.2.18";
 
 const BUILD = "0.1.0";
 
@@ -55,7 +55,7 @@ const state = {
   highlightSku: "",
   sellerCue: "",
   oneCisco: null,
-  storyLens: "bt",
+  storyLens: "cisco",
 };
 
 let graph = null;
@@ -894,21 +894,18 @@ function ciscoChip(item) {
 
 function storyMarks() {
   return {
-    ai: `<svg viewBox="0 0 48 48" aria-hidden="true"><path fill="currentColor" d="M18 6h2v4h-2zm6 0h2v4h-2zm6 0h2v4h-2zM18 38h2v4h-2zm6 0h2v4h-2zm6 0h2v4h-2zM6 18h4v2H6zm0 6h4v2H6zm0 6h4v2H6zM38 18h4v2h-4zm0 6h4v2h-4zm0 6h4v2h-4z"/><rect x="14" y="14" width="20" height="20" rx="3" fill="none" stroke="currentColor" stroke-width="2.4"/><rect x="19" y="19" width="10" height="10" rx="1.5" fill="currentColor"/></svg>`,
-    wp: `<svg viewBox="0 0 48 48" aria-hidden="true"><path fill="currentColor" d="M8 30.5 24 8l16 22.5H8zm6.2 3.5h19.6v3.2H14.2z"/><path fill="#041018" d="M20 24h8v4h-8z"/></svg>`,
-    res: `<svg viewBox="0 0 48 48" aria-hidden="true"><path fill="currentColor" d="M24 4 8 10.5V24c0 9.2 6.4 15.2 16 18.2 9.6-3 16-9 16-18.2V10.5L24 4zm0 8.2 9.2 3.6V24c0 5.6-3.6 9.4-9.2 11.4-5.6-2-9.2-5.8-9.2-11.4V15.8L24 12.2z"/></svg>`,
+    ai: `<svg viewBox="0 0 48 48" aria-hidden="true"><rect x="8" y="10" width="32" height="8" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.7"/><rect x="8" y="20" width="32" height="8" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.7"/><rect x="8" y="30" width="32" height="8" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M14 14h8M14 24h6M14 34h10" stroke="currentColor" stroke-width="1.5"/></svg>`,
+    wp: `<svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="3.2" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="14" r="2.4" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="36" cy="14" r="2.4" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="10" cy="32" r="2.4" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="38" cy="32" r="2.4" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M14 15.5 21 22M34 15.5 27 22M12 30l9-5M36 30l-9-5" stroke="currentColor" stroke-width="1.4"/></svg>`,
+    res: `<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 8v16M18 18l6 6 6-6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M10 30c4 3 8 3 14 0s10-3 14 0M12 36c3.5 2.4 7 2.4 12 0s8.5-2.4 12 0" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>`,
   };
 }
 
 function deckBar(card, marks) {
   return `
-    <div class="deck-slot${card.place === "wide" ? " deck-slot-wide" : ""}">
-      <button type="button" class="deck-bar deck-${esc(card.tone)}${card.place === "wide" ? " deck-wide" : ""}" data-kind="story" data-id="${esc(card.id)}">
-        <span class="deck-ico">${marks[card.tone] || ""}</span>
-        <span class="deck-name">${esc(card.label)}</span>
-      </button>
-      <p class="deck-bt">${esc(card.bt || "Cisco families")}</p>
-    </div>`;
+    <button type="button" class="deck-bar deck-${esc(card.tone)}${card.place === "wide" ? " deck-wide" : ""}" data-kind="story" data-id="${esc(card.id)}">
+      <span class="deck-ico">${marks[card.tone] || ""}</span>
+      <span class="deck-name">${esc(card.label)}</span>
+    </button>`;
 }
 
 function renderStoryHome() {
@@ -929,8 +926,7 @@ function renderStoryHome() {
                 <span class="deck-arrow" aria-hidden="true"></span>
                 <span class="deck-rule-label">${esc(bridge.label)}</span>
                 <span class="deck-arrow deck-arrow-r" aria-hidden="true"></span>
-              </button>
-              <p class="deck-bt deck-bt-mid">${esc(bridge.bt || "")}</p>`
+              </button>`
             : ""
         }
         ${wide ? deckBar(wide, marks) : ""}
@@ -944,47 +940,95 @@ function renderStoryHome() {
     </div>`;
 }
 
+function pillarGlyph(id) {
+  const key = id || "";
+  const phone = /phone|headset/.test(key);
+  const radio = /wireless/.test(key);
+  const video = /room|desk|meeting/.test(key);
+  const router = /router|sdwan|meraki-mx|catalyst-center/.test(key);
+  const server = /ucs|silicon|hyperflex|nexus|aci|intersight/.test(key);
+  const eye = /thousand|appdynamics|splunk|fso|cisco-iq/.test(key);
+  const shield = /secure|duo|umbrella|ise|talos|xdr|defense|hypershield|cyber|identity|vuln|stealth|workload/.test(key);
+  const app = /webex|cloud-control|iq/.test(key);
+  let body = `<rect x="4" y="7" width="16" height="8" rx="1.3" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M7 11h6M6 15v2M18 15v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>`;
+  if (phone) body = `<path d="M8 5h3l1.4 3.6-2 1.2a11 11 0 0 0 5 5l1.2-2L20 14v3A13 13 0 0 1 8 5z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>`;
+  else if (radio) body = `<path d="M12 15.5V19M8.5 19h7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M7.5 13a5.5 5.5 0 0 1 9 0M5 10a8.5 8.5 0 0 1 14 0" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>`;
+  else if (video) body = `<rect x="3.5" y="7" width="12" height="9" rx="1.3" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M15.5 10.2 20.5 8v8l-5-2.2z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>`;
+  else if (router) body = `<rect x="3.5" y="8" width="17" height="8" rx="1.4" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M7 16v3M12 16v3M17 16v3M8 12h.1M12 12h.1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>`;
+  else if (server) body = `<rect x="5" y="3.5" width="14" height="4.6" rx="1" fill="none" stroke="currentColor" stroke-width="1.4"/><rect x="5" y="9.7" width="14" height="4.6" rx="1" fill="none" stroke="currentColor" stroke-width="1.4"/><rect x="5" y="15.9" width="14" height="4.6" rx="1" fill="none" stroke="currentColor" stroke-width="1.4"/>`;
+  else if (eye) body = `<path d="M2.5 12S6 6.8 12 6.8 21.5 12 21.5 12 18 17.2 12 17.2 2.5 12 2.5 12z" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="2.1" fill="none" stroke="currentColor" stroke-width="1.5"/>`;
+  else if (shield) body = `<path d="M12 3.2 5.2 6.2v5.8c0 4.1 2.7 6.5 6.8 7.6 4.1-1.1 6.8-3.5 6.8-7.6V6.2L12 3.2z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>`;
+  else if (app) body = `<circle cx="12" cy="12" r="2.6" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M12 4.2v2.4M12 17.4v2.4M4.2 12h2.4M17.4 12h2.4M6.4 6.4l1.7 1.7M15.9 15.9l1.7 1.7M17.6 6.4l-1.7 1.7M8.1 15.9l-1.7 1.7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>`;
+  return `<svg viewBox="0 0 24 24" aria-hidden="true">${body}</svg>`;
+}
+
+function btByCisco(page) {
+  const map = new Map();
+  for (const group of page.groups || []) {
+    for (const item of group.cisco || []) map.set(item.id, group.family);
+  }
+  return map;
+}
+
 function renderStoryPage(id) {
   const story = state.oneCisco;
   const page = story?.pages?.[id];
   const meta = storyMeta(id);
   if (!page || !meta) return renderStoryHome();
-  const groups = page.groups || [];
-  const ciscoOnly = page.ciscoOnly || [];
-  const hasBt = groups.length > 0;
+  const tone = { "ai-dc": "ai", workplaces: "wp", resilience: "res", connectivity: "link" }[id] || "link";
+  const board = page.board || [];
+  const cols = page.cols || 6;
+  const join = btByCisco(page);
+  const hasBt = (page.groups || []).length > 0;
   const lens = !hasBt || state.storyLens === "cisco" ? "cisco" : "bt";
-  const groupHtml = groups
+  const extras = (lens === "bt" ? page.groups || [] : [])
+    .filter((g) => !(g.cisco || []).length)
     .map((g) => {
       const family = state.families.find((f) => f.id === g.family);
-      if (!family) return "";
-      const chips = (g.cisco || []).map(ciscoChip).join("");
-      return `<article class="oc-group">
-        <button type="button" class="oc-bt-open" data-kind="family" data-id="${esc(family.id)}">${esc(family.name)}</button>
-        ${chips ? `<div class="oc-chips">${chips}</div>` : `<p class="oc-group-note">BT offer. No separate Cisco family.</p>`}
-      </article>`;
+      return family ? { id: family.id, name: family.name, btOnly: true, familyId: family.id } : null;
+    })
+    .filter(Boolean);
+  const items = [...extras, ...board.map((item) => ({ ...item, familyId: join.get(item.id) || "" }))];
+  const nodes = items
+    .map((item) => {
+      const url = item.btOnly ? "" : ciscoFamilyUrl(item.id);
+      const family = item.familyId ? state.families.find((f) => f.id === item.familyId) : null;
+      const dim = lens === "bt" && !family && !item.btOnly;
+      const face = `<span class="pillar-orb">${pillarGlyph(item.btOnly ? "webex-app" : item.id)}</span><span class="pillar-label">${esc(item.name)}</span>`;
+      const hit = item.btOnly
+        ? `<button type="button" class="pillar-hit" data-kind="family" data-id="${esc(item.familyId)}">${face}</button>`
+        : url
+          ? `<a class="pillar-hit" href="${esc(url)}" target="_blank" rel="noopener noreferrer">${face}</a>`
+          : `<div class="pillar-hit">${face}</div>`;
+      return `<div class="pillar-node${dim ? " is-dim" : ""}">${hit}${
+        family && lens === "bt" && !item.btOnly
+          ? `<button type="button" class="pillar-bt" data-kind="family" data-id="${esc(family.id)}">${esc(family.name)}</button>`
+          : ""
+      }</div>`;
     })
     .join("");
-  const ciscoHtml = [...groups.flatMap((g) => g.cisco || []), ...ciscoOnly].map(ciscoChip).join("");
-  const note = !hasBt
-    ? `<p class="oc-note">BT International does not package this pillar. These families open on the Portfolio Navigator.</p>`
-    : "";
+  const cards = (page.highlights || [])
+    .map((h) => `<article class="pillar-card"><h2>${esc(h.title)}</h2><p>${esc(h.body)}</p></article>`)
+    .join("");
   return `
-    <div class="seller-wrap oc-segue">
+    <div class="pillar-page">
       ${sellerTrail()}
-      <p class="hood-kicker">One Cisco</p>
-      <h1>${esc(meta.label)}</h1>
-      ${meta.promise ? `<p class="seller-line">${esc(meta.promise)}</p>` : ""}
-      ${meta.bt ? `<p class="oc-segue-bt">BT represents this as ${esc(meta.bt)}.</p>` : note}
-      ${
-        hasBt
-          ? `<div class="oc-lens" role="group" aria-label="How to read this pillar">
-              <button type="button" class="oc-lens-btn${lens === "bt" ? " on" : ""}" data-lens="bt">BT groups</button>
-              <button type="button" class="oc-lens-btn${lens === "cisco" ? " on" : ""}" data-lens="cisco">Cisco families</button>
-            </div>`
-          : ""
-      }
-      ${lens === "bt" ? `<div class="oc-groups">${groupHtml}</div>` : `<div class="oc-chips oc-chips-solo">${ciscoHtml}</div>`}
-      ${ciscoOnly.length && lens === "bt" ? `<h2>Cisco only</h2><p class="oc-note">These stay on the Portfolio Navigator. BT does not rename them.</p><div class="oc-chips">${ciscoOnly.map(ciscoChip).join("")}</div>` : ""}
+      <div class="pillar-board tone-${tone}">
+        <div class="pillar-head">
+          <div class="pillar-chip">${storyMarks()[tone] || storyMarks().ai}<span>${esc(meta.label)}</span></div>
+          ${
+            hasBt
+              ? `<div class="oc-lens pillar-lens" role="group" aria-label="How to read this pillar">
+                  <button type="button" class="oc-lens-btn${lens === "cisco" ? " on" : ""}" data-lens="cisco">Cisco families</button>
+                  <button type="button" class="oc-lens-btn${lens === "bt" ? " on" : ""}" data-lens="bt">BT groups</button>
+                </div>`
+              : ""
+          }
+        </div>
+        ${meta.promise ? `<div class="pillar-promise"><span>${esc(meta.promise)}</span>${meta.bt ? `<span class="pillar-btline">BT · ${esc(meta.bt)}</span>` : ""}</div>` : ""}
+        <div class="pillar-grid cols-${cols}" style="--cols:${cols}">${nodes}</div>
+        ${cards ? `<div class="pillar-ribbon">${cards}</div>` : ""}
+      </div>
     </div>`;
 }
 

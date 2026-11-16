@@ -37,61 +37,486 @@
     "ai-dc": {
       "groups": [],
       "ciscoOnly": [
-        { "id": "nexus", "name": "Cisco Nexus Switches" },
-        { "id": "aci", "name": "Cisco ACI" },
-        { "id": "nexus-dashboard", "name": "Cisco Nexus Dashboard" },
-        { "id": "nexus-one", "name": "Cisco Nexus One" },
-        { "id": "silicon-one", "name": "Cisco Silicon One" },
-        { "id": "ucs", "name": "Cisco UCS Servers" },
-        { "id": "hyperflex", "name": "Cisco HyperFlex" },
-        { "id": "intersight", "name": "Cisco Intersight" }
+        {
+          "id": "nexus",
+          "name": "Cisco Nexus Switches"
+        },
+        {
+          "id": "aci",
+          "name": "Cisco ACI"
+        },
+        {
+          "id": "nexus-dashboard",
+          "name": "Cisco Nexus Dashboard"
+        },
+        {
+          "id": "nexus-one",
+          "name": "Cisco Nexus One"
+        },
+        {
+          "id": "silicon-one",
+          "name": "Cisco Silicon One"
+        },
+        {
+          "id": "ucs",
+          "name": "Cisco UCS Servers"
+        },
+        {
+          "id": "hyperflex",
+          "name": "Cisco HyperFlex"
+        },
+        {
+          "id": "intersight",
+          "name": "Cisco Intersight"
+        }
+      ],
+      "cols": 4,
+      "board": [
+        {
+          "id": "nexus",
+          "name": "Nexus Switches"
+        },
+        {
+          "id": "aci",
+          "name": "ACI"
+        },
+        {
+          "id": "nexus-dashboard",
+          "name": "Nexus Dashboard"
+        },
+        {
+          "id": "nexus-one",
+          "name": "Nexus One"
+        },
+        {
+          "id": "silicon-one",
+          "name": "Silicon One"
+        },
+        {
+          "id": "ucs",
+          "name": "UCS Servers"
+        },
+        {
+          "id": "hyperflex",
+          "name": "HyperFlex"
+        },
+        {
+          "id": "intersight",
+          "name": "Intersight"
+        }
+      ],
+      "highlights": [
+        {
+          "title": "Scale networking for AI",
+          "body": "Silicon, systems, optics, and one management layer"
+        },
+        {
+          "title": "Run the full stack efficiently",
+          "body": "AI and traditional systems, with observability and security"
+        },
+        {
+          "title": "Protect east-west traffic",
+          "body": "Distributed security across every layer of the workload"
+        }
       ]
     },
     "workplaces": {
       "groups": [
-        { "family": "global-voice", "cisco": [{ "id": "webex-calling", "name": "Webex Calling" }] },
-        { "family": "webex-meetings", "cisco": [{ "id": "webex-meetings", "name": "Webex Meetings" }] },
-        { "family": "cisco-collaboration", "cisco": [{ "id": "webex-app", "name": "Webex App" }] },
-        { "family": "uc-edge", "cisco": [{ "id": "unified-cm", "name": "Cisco Unified Communications Manager" }] },
-        { "family": "one-cloud-cisco", "cisco": [] },
+        {
+          "family": "global-voice",
+          "cisco": [
+            {
+              "id": "webex-calling",
+              "name": "Webex Calling"
+            }
+          ]
+        },
+        {
+          "family": "webex-meetings",
+          "cisco": [
+            {
+              "id": "webex-meetings",
+              "name": "Webex Meetings"
+            }
+          ]
+        },
+        {
+          "family": "cisco-collaboration",
+          "cisco": [
+            {
+              "id": "webex-app",
+              "name": "Webex App"
+            }
+          ]
+        },
+        {
+          "family": "uc-edge",
+          "cisco": [
+            {
+              "id": "unified-cm",
+              "name": "Cisco Unified Communications Manager"
+            }
+          ]
+        },
+        {
+          "family": "one-cloud-cisco",
+          "cisco": []
+        },
         {
           "family": "collab-devices",
           "cisco": [
-            { "id": "room-systems", "name": "Cisco Room Systems" },
-            { "id": "desk-devices", "name": "Cisco Desk Devices" },
-            { "id": "ip-phones", "name": "Cisco IP Phones" },
-            { "id": "conf-phones", "name": "Cisco Conference Phones" },
-            { "id": "cisco-headsets", "name": "Cisco Headsets" }
+            {
+              "id": "room-systems",
+              "name": "Cisco Room Systems"
+            },
+            {
+              "id": "desk-devices",
+              "name": "Cisco Desk Devices"
+            },
+            {
+              "id": "ip-phones",
+              "name": "Cisco IP Phones"
+            },
+            {
+              "id": "conf-phones",
+              "name": "Cisco Conference Phones"
+            },
+            {
+              "id": "cisco-headsets",
+              "name": "Cisco Headsets"
+            }
           ]
         }
       ],
-      "ciscoOnly": []
+      "ciscoOnly": [],
+      "cols": 6,
+      "board": [
+        {
+          "id": "wan-routers",
+          "name": "ASR / NCS / 8000 Routers"
+        },
+        {
+          "id": "catalyst-access",
+          "name": "Catalyst Access Switches"
+        },
+        {
+          "id": "catalyst-center",
+          "name": "Catalyst Center"
+        },
+        {
+          "id": "catalyst-core",
+          "name": "Catalyst Core / Aggregation"
+        },
+        {
+          "id": "catalyst-wireless",
+          "name": "Catalyst Wireless APs"
+        },
+        {
+          "id": "secure-routers",
+          "name": "8000 Secure Routers"
+        },
+        {
+          "id": "cloud-control",
+          "name": "Cloud Control"
+        },
+        {
+          "id": "conf-phones",
+          "name": "Conference Phones"
+        },
+        {
+          "id": "desk-devices",
+          "name": "Desk Devices"
+        },
+        {
+          "id": "cisco-headsets",
+          "name": "Headsets"
+        },
+        {
+          "id": "ip-phones",
+          "name": "IP Phones"
+        },
+        {
+          "id": "isr-routers",
+          "name": "ISR Routers"
+        },
+        {
+          "id": "room-systems",
+          "name": "Room Systems"
+        },
+        {
+          "id": "sdwan",
+          "name": "SD-WAN"
+        },
+        {
+          "id": "unified-cm",
+          "name": "Unified Communications Manager"
+        },
+        {
+          "id": "industrial-eth",
+          "name": "Industrial Networking"
+        },
+        {
+          "id": "meraki-mx",
+          "name": "Meraki MX SD-WAN"
+        },
+        {
+          "id": "meraki-switches",
+          "name": "Meraki Switches"
+        },
+        {
+          "id": "meraki-wireless",
+          "name": "Meraki Wireless APs"
+        },
+        {
+          "id": "webex-app",
+          "name": "Webex App"
+        },
+        {
+          "id": "webex-calling",
+          "name": "Webex Calling"
+        },
+        {
+          "id": "webex-connect",
+          "name": "Webex Connect"
+        },
+        {
+          "id": "webex-cc",
+          "name": "Webex Contact Center"
+        },
+        {
+          "id": "webex-meetings",
+          "name": "Webex Meetings"
+        }
+      ],
+      "highlights": [
+        {
+          "title": "Modernize and secure the network",
+          "body": "Scalable devices, AgenticOps, and security fused into the network"
+        },
+        {
+          "title": "Secure the human and agentic workforce",
+          "body": "Identity, zero trust, SASE, and protection for agent actions"
+        },
+        {
+          "title": "Intelligent workplace experiences",
+          "body": "Collaboration and networking feeding data and intelligence"
+        }
+      ]
     },
     "resilience": {
       "groups": [
-        { "family": "ops-fabric", "cisco": [] }
+        {
+          "family": "ops-fabric",
+          "cisco": []
+        }
       ],
       "ciscoOnly": [
-        { "id": "duo", "name": "Cisco Duo" },
-        { "id": "umbrella", "name": "Cisco Umbrella" },
-        { "id": "ise", "name": "Cisco ISE" }
+        {
+          "id": "duo",
+          "name": "Cisco Duo"
+        },
+        {
+          "id": "umbrella",
+          "name": "Cisco Umbrella"
+        },
+        {
+          "id": "ise",
+          "name": "Cisco ISE"
+        }
+      ],
+      "cols": 6,
+      "board": [
+        {
+          "id": "sf-branch",
+          "name": "Secure Firewall"
+        },
+        {
+          "id": "sf-enterprise",
+          "name": "Secure Firewall Enterprise"
+        },
+        {
+          "id": "hypershield",
+          "name": "Hypershield"
+        },
+        {
+          "id": "ai-defense",
+          "name": "AI Defense"
+        },
+        {
+          "id": "secure-access",
+          "name": "Secure Access"
+        },
+        {
+          "id": "duo",
+          "name": "Duo"
+        },
+        {
+          "id": "umbrella",
+          "name": "Umbrella"
+        },
+        {
+          "id": "secure-email",
+          "name": "Secure Email"
+        },
+        {
+          "id": "secure-endpoint",
+          "name": "Secure Endpoint"
+        },
+        {
+          "id": "ise",
+          "name": "ISE"
+        },
+        {
+          "id": "talos",
+          "name": "Talos"
+        },
+        {
+          "id": "xdr",
+          "name": "XDR"
+        },
+        {
+          "id": "cyber-vision",
+          "name": "Cyber Vision"
+        },
+        {
+          "id": "secure-client",
+          "name": "Secure Client"
+        },
+        {
+          "id": "secure-workload",
+          "name": "Secure Workload"
+        },
+        {
+          "id": "stealthwatch",
+          "name": "Secure Network Analytics"
+        },
+        {
+          "id": "secure-web",
+          "name": "Secure Web"
+        },
+        {
+          "id": "multicloud-defense",
+          "name": "Multicloud Defense"
+        },
+        {
+          "id": "vuln-mgmt",
+          "name": "Vulnerability Management"
+        },
+        {
+          "id": "secure-equipment",
+          "name": "Secure Equipment Access"
+        },
+        {
+          "id": "identity-intel",
+          "name": "Identity Intelligence"
+        },
+        {
+          "id": "thousandeyes",
+          "name": "ThousandEyes"
+        },
+        {
+          "id": "appdynamics",
+          "name": "AppDynamics"
+        },
+        {
+          "id": "splunk",
+          "name": "Splunk"
+        },
+        {
+          "id": "fso",
+          "name": "Full-Stack Observability"
+        },
+        {
+          "id": "cisco-iq",
+          "name": "Cisco IQ"
+        }
+      ],
+      "highlights": [
+        {
+          "title": "Turn machine data into agentic action",
+          "body": "A common data fabric so insights are not trapped in one tool"
+        },
+        {
+          "title": "Optimize AI at scale",
+          "body": "Observability, agent behavior, and token-cost visibility"
+        },
+        {
+          "title": "Defend at machine speed",
+          "body": "Agentic SOC capabilities for detection and response"
+        }
       ]
     },
     "connectivity": {
       "groups": [
-        { "family": "global-fabric", "cisco": [] },
-        { "family": "dia", "cisco": [] },
-        { "family": "icr", "cisco": [] },
+        {
+          "family": "global-fabric",
+          "cisco": []
+        },
+        {
+          "family": "dia",
+          "cisco": []
+        },
+        {
+          "family": "icr",
+          "cisco": []
+        },
         {
           "family": "sdwan",
           "cisco": [
-            { "id": "sdwan", "name": "Cisco SD-WAN" },
-            { "id": "meraki-mx", "name": "Meraki MX" }
+            {
+              "id": "sdwan",
+              "name": "Cisco SD-WAN"
+            },
+            {
+              "id": "meraki-mx",
+              "name": "Meraki MX"
+            }
           ]
         },
-        { "family": "sase", "cisco": [{ "id": "secure-access", "name": "Cisco Secure Access" }] }
+        {
+          "family": "sase",
+          "cisco": [
+            {
+              "id": "secure-access",
+              "name": "Cisco Secure Access"
+            }
+          ]
+        }
       ],
-      "ciscoOnly": []
+      "ciscoOnly": [],
+      "cols": 4,
+      "board": [
+        {
+          "id": "sdwan",
+          "name": "SD-WAN"
+        },
+        {
+          "id": "meraki-mx",
+          "name": "Meraki MX SD-WAN"
+        },
+        {
+          "id": "secure-access",
+          "name": "Secure Access"
+        },
+        {
+          "id": "catalyst-center",
+          "name": "Catalyst Center"
+        }
+      ],
+      "highlights": [
+        {
+          "title": "One network for every site",
+          "body": "Global Fabric carries internet, WAN, and cloud"
+        },
+        {
+          "title": "Managed SD-WAN",
+          "body": "Cisco SD-WAN is one of the stacks BT runs"
+        },
+        {
+          "title": "SASE on the fabric",
+          "body": "Cisco Secure Access sits with the other SSE choices"
+        }
+      ]
     }
   }
 }

@@ -152,6 +152,9 @@ for (const [pid, page] of Object.entries(oneCisco.pages || {})) {
   for (const c of page.ciscoOnly || []) {
     if (!/^[a-z0-9-]+$/.test(c.id || "")) errors.push(`one-cisco ${pid}: bad cisco id "${c.id}"`);
   }
+  for (const c of page.board || []) {
+    if (!/^[a-z0-9-]+$/.test(c.id || "")) errors.push(`one-cisco ${pid}: bad board id "${c.id}"`);
+  }
 }
 scan(oneCisco, "one-cisco");
 
