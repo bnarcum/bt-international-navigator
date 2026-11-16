@@ -134,6 +134,27 @@ scan(solutions, "solutions");
 scan(outcomes, "outcomes");
 scan(products, "products");
 
+const oneCisco = load("catalog/one-cisco.json");
+const storyIds = new Set([...(oneCisco.cards || []).map((c) => c.id), oneCisco.bridge?.id].filter(Boolean));
+if (!storyIds.has("ai-dc") || !storyIds.has("workplaces") || !storyIds.has("resilience")) {
+  errors.push("one-cisco: missing a One Cisco pillar");
+}
+if (oneCisco.bridge?.id !== "connectivity") errors.push("one-cisco: bridge must be the connectivity line");
+if (!publicHostOk(`${oneCisco.navigator}#family=sdwan`)) errors.push("one-cisco: navigator host is not allowed");
+for (const [pid, page] of Object.entries(oneCisco.pages || {})) {
+  if (!storyIds.has(pid)) errors.push(`one-cisco page ${pid}: not a card or the bridge`);
+  for (const g of page.groups || []) {
+    if (!familyIds.has(g.family)) errors.push(`one-cisco ${pid}: unknown BT family "${g.family}"`);
+    for (const c of g.cisco || []) {
+      if (!/^[a-z0-9-]+$/.test(c.id || "")) errors.push(`one-cisco ${pid}: bad cisco id "${c.id}"`);
+    }
+  }
+  for (const c of page.ciscoOnly || []) {
+    if (!/^[a-z0-9-]+$/.test(c.id || "")) errors.push(`one-cisco ${pid}: bad cisco id "${c.id}"`);
+  }
+}
+scan(oneCisco, "one-cisco");
+
 if (errors.length) {
   console.error("FAIL test-data");
   errors.forEach((e) => console.error("  -", e));

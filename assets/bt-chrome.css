@@ -1455,3 +1455,106 @@ button.arch-node, button.partner { cursor: pointer; }
 @media (max-width: 720px) {
   .proof-stats { grid-template-columns: 1fr 1fr; }
 }
+
+.oc-home, .oc-segue { position: relative; z-index: 1; max-width: 920px; }
+.oc-headline {
+  max-width: 40rem;
+  margin: 12px auto 28px;
+  text-align: center;
+  color: #d1d1d6;
+  font-size: 18px;
+  line-height: 1.4;
+}
+.oc-stage { display: flex; flex-direction: column; align-items: stretch; gap: 14px; }
+.oc-top { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.oc-card, .oc-bridge {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-align: left;
+  font: inherit;
+  color: #e8f6ff;
+  background: rgba(2, 14, 32, 0.82);
+  border: 2px solid #02c8ff;
+  border-radius: 8px;
+  padding: 16px 18px;
+  cursor: pointer;
+}
+.oc-card.oc-ai { border-color: #0a60ff; }
+.oc-card.oc-wp { border-color: #2dce5c; }
+.oc-card.oc-res {
+  border-color: transparent;
+  background:
+    linear-gradient(rgba(2, 14, 32, 0.94), rgba(2, 14, 32, 0.94)) padding-box,
+    linear-gradient(90deg, #02c8ff, #d946ef, #ff9000) border-box;
+}
+.oc-card:hover, .oc-bridge:hover { transform: translateY(-2px); }
+.oc-ico-wrap {
+  width: 44px;
+  height: 44px;
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  color: #7eeaff;
+}
+.oc-card.oc-wp .oc-ico-wrap { color: #2dce5c; }
+.oc-card.oc-res .oc-ico-wrap { color: #ffb020; }
+.oc-ico { width: 32px; height: 32px; }
+.oc-card-copy { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.oc-name { font-size: 18px; font-weight: 700; letter-spacing: -0.02em; }
+.oc-bt { color: #c7c7cc; font-size: 13px; font-weight: 600; }
+.oc-bt-quiet { color: #8e8e93; font-weight: 500; }
+.oc-bridge { flex-direction: column; align-items: center; gap: 4px; border-style: dashed; background: transparent; }
+.oc-bridge-line { display: flex; align-items: center; gap: 12px; font-size: 15px; font-weight: 650; }
+.oc-ai { margin: 8px 0 0; text-align: center; color: #e8f6ff; font-weight: 650; letter-spacing: 0.01em; }
+.oc-ai span { color: #02c8ff; margin: 0 8px; letter-spacing: -0.12em; }
+.oc-segue-bt { color: #d1d1d6; font-size: 17px; margin-top: -6px; }
+.oc-note { color: #aeaeb2; max-width: 40rem; }
+.oc-lens { display: flex; gap: 8px; margin: 18px 0; }
+.oc-lens-btn {
+  font: inherit;
+  color: #d1d1d6;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 980px;
+  padding: 8px 14px;
+  cursor: pointer;
+}
+.oc-lens-btn.on { color: #071018; background: #7eeaff; border-color: #7eeaff; }
+.oc-groups { display: flex; flex-direction: column; gap: 14px; }
+.oc-group {
+  padding: 14px 0 4px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+.oc-bt-open {
+  font: inherit;
+  font-size: 18px;
+  font-weight: 700;
+  color: #f5f5f7;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+.oc-bt-open:hover { color: #7eeaff; }
+.oc-group-note { color: #8e8e93; font-size: 13px; margin: 6px 0 0; }
+.oc-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.oc-cisco {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 160px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(2, 200, 255, 0.35);
+  background: rgba(2, 200, 255, 0.06);
+  color: #f5f5f7;
+  text-decoration: none;
+}
+.oc-cisco:hover { border-color: #7eeaff; }
+.oc-host { color: #8e8e93; font-size: 12px; }
+.oc-host::after { content: " ↗"; color: #7eeaff; }
+@media (max-width: 720px) {
+  .oc-top { grid-template-columns: 1fr; }
+  .oc-name { font-size: 16px; }
+}

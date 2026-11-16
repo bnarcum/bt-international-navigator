@@ -1,4 +1,4 @@
-import { createGraph } from "./graph.js?v=0.2.15";
+import { createGraph } from "./graph.js?v=0.2.16";
 import { createPanel } from "./panel.js";
 import { createSolutionsApi } from "./solutions.js";
 import { createSolutionsUI } from "./solutions-ui.js";
@@ -14,8 +14,8 @@ import {
   oemProductsOn,
   productsOn,
   renderEdge,
-} from "./hood.js?v=0.2.15";
-import { markSvg } from "./marks.js?v=0.2.15";
+} from "./hood.js?v=0.2.16";
+import { markSvg } from "./marks.js?v=0.2.16";
 
 const BUILD = "0.1.0";
 
@@ -28,6 +28,7 @@ const DATA_PATHS = {
   oems: "catalog/oems.json",
   products: "catalog/products.json",
   oemProducts: "catalog/oem-products.json",
+  oneCisco: "catalog/one-cisco.json",
 };
 
 const state = {
@@ -53,6 +54,8 @@ const state = {
   portfolioSearch: "",
   highlightSku: "",
   sellerCue: "",
+  oneCisco: null,
+  storyLens: "bt",
 };
 
 let graph = null;
@@ -83,6 +86,7 @@ async function loadData() {
     else if (key === "oems") state.oems = data.oems || [];
     else if (key === "products") state.products = data.products || [];
     else if (key === "oemProducts") state.oemProducts = data.oemProducts || [];
+    else if (key === "oneCisco") state.oneCisco = data;
   }
 }
 
@@ -201,6 +205,7 @@ function syncHash() {
   if (state.viewMode === "seller") {
     if (kind === "portfolio" && id) next = `#p=${encodeURIComponent(id)}`;
     else if (kind === "family" && id) next = `#t=${encodeURIComponent(id)}`;
+    else if (kind === "story" && id) next = `#story=${encodeURIComponent(id)}`;
     const href = location.pathname + location.search + next;
     if (location.pathname + location.search + location.hash !== href) history.replaceState(null, "", href);
     return;
@@ -230,7 +235,14 @@ function applyHashFocus() {
   const params = new URLSearchParams(raw);
   const topic = params.get("t");
   const portfolio = params.get("p");
+  const story = params.get("story");
   if (!params.get("product") && !params.get("oem") && !params.get("sku")) {
+    if (story && state.oneCisco?.pages?.[story]) {
+      state.viewMode = "seller";
+      state.focus = { kind: "story", id: story };
+      state.path = [];
+      return;
+    }
     if (topic && state.families.some((f) => f.id === topic)) {
       state.viewMode = "seller";
       state.focus = { kind: "family", id: topic };
@@ -348,6 +360,7 @@ function btn(kind, id, title, sub, pillar) {
 
 function labelFor(kind, id) {
   if (kind === "home") return "Start";
+  if (kind === "story") return storyMeta(id)?.label || id;
   if (kind === "portfolio") return portfolioById(id)?.name || id;
   if (kind === "practice") return pn(id);
   if (kind === "family") return state.families.find((f) => f.id === id)?.name || id;
@@ -358,7 +371,7 @@ function labelFor(kind, id) {
 }
 
 function updatePath(kind, id) {
-  if (kind === "home") {
+  if (kind === "home" || kind === "story") {
     state.path = [];
     return;
   }
@@ -698,13 +711,20 @@ function renderSeller() {
   if (!root) return;
   const { kind, id } = state.focus;
   let html = "";
-  if (kind === "portfolio" && portfolioById(id)) html = renderPortfolioPage(portfolioById(id));
+  if (kind === "story" && state.oneCisco?.pages?.[id]) html = renderStoryPage(id);
+  else if (kind === "portfolio" && portfolioById(id)) html = renderPortfolioPage(portfolioById(id));
   else if (kind === "family") html = renderTopicPage(id);
-  else html = renderSellerHome();
+  else html = renderStoryHome();
   root.innerHTML = html;
   if (root.dataset.bound !== "1") {
     root.dataset.bound = "1";
     root.addEventListener("click", (e) => {
+      const lens = e.target.closest("[data-lens]");
+      if (lens && root.contains(lens)) {
+        state.storyLens = lens.dataset.lens === "cisco" ? "cisco" : "bt";
+        renderSeller();
+        return;
+      }
       const el = e.target.closest("[data-kind][data-id]");
       if (!el || !root.contains(el) || el.tagName === "A") return;
       e.preventDefault();
@@ -718,6 +738,8 @@ function sellerTrail() {
   const crumbs = [{ kind: "home", id: "home", label: "Start" }];
   if (state.focus.kind === "portfolio") {
     crumbs.push({ kind: "portfolio", id: state.focus.id, label: labelFor("portfolio", state.focus.id) });
+  } else if (state.focus.kind === "story") {
+    crumbs.push({ kind: "story", id: state.focus.id, label: labelFor("story", state.focus.id) });
   } else if (state.focus.kind === "family") {
     const port = portfolioForFamily(state.focus.id);
     if (port) crumbs.push({ kind: "portfolio", id: port.id, label: port.name });
@@ -849,6 +871,112 @@ function architectureDiagram() {
         ${archNode("ops-fabric", "Ops Fabric — operates network, voice, and security", "arch-core")}
       </div>
     </figure>`;
+}
+
+function storyMeta(id) {
+  const story = state.oneCisco;
+  if (!story) return null;
+  return story.cards?.find((c) => c.id === id) || (story.bridge?.id === id ? story.bridge : null);
+}
+
+function ciscoFamilyUrl(id) {
+  if (!/^[a-z0-9-]+$/.test(id || "")) return "";
+  const base = String(state.oneCisco?.navigator || "").replace(/\/$/, "");
+  if (!base.startsWith("https://bnarcum.github.io/cisco-portfolio-navigator")) return "";
+  return `${base}/#family=${encodeURIComponent(id)}`;
+}
+
+function ciscoChip(item) {
+  const url = ciscoFamilyUrl(item.id);
+  if (!url) return "";
+  return `<a class="oc-cisco" href="${esc(url)}" target="_blank" rel="noopener noreferrer"><span>${esc(item.name)}</span><span class="oc-host">Portfolio Navigator</span></a>`;
+}
+
+function storyMarks() {
+  return {
+    ai: `<svg class="oc-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3h8v4H8zM4 9h16v10H4zM9 13h2M13 13h2M9 16h6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>`,
+    wp: `<svg class="oc-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 15.5 12 4l8 11.5H4zM8 19h8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>`,
+    res: `<svg class="oc-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 5 6v6c0 4.2 2.8 6.8 7 8 4.2-1.2 7-3.8 7-8V6l-7-3z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>`,
+  };
+}
+
+function renderStoryHome() {
+  const story = state.oneCisco;
+  if (!story) return renderSellerHome();
+  const marks = storyMarks();
+  const tops = (story.cards || []).filter((c) => c.place === "top");
+  const wide = (story.cards || []).find((c) => c.place === "wide");
+  const card = (c) => `
+    <button type="button" class="oc-card oc-${esc(c.tone)}" data-kind="story" data-id="${esc(c.id)}">
+      <span class="oc-ico-wrap">${marks[c.tone] || ""}</span>
+      <span class="oc-card-copy">
+        <span class="oc-name">${esc(c.label)}</span>
+        ${c.bt ? `<span class="oc-bt">${esc(c.bt)}</span>` : `<span class="oc-bt oc-bt-quiet">Cisco portfolio</span>`}
+      </span>
+    </button>`;
+  const bridge = story.bridge;
+  return `
+    <div class="seller-wrap oc-home">
+      <p class="oc-headline">${esc(story.headline || "")}</p>
+      <div class="oc-stage">
+        <div class="oc-top">${tops.map(card).join("")}</div>
+        ${
+          bridge
+            ? `<button type="button" class="oc-bridge" data-kind="story" data-id="${esc(bridge.id)}">
+                <span class="oc-bridge-line"><span aria-hidden="true">←</span><span>${esc(bridge.label)}</span><span aria-hidden="true">→</span></span>
+                <span class="oc-bt">${esc(bridge.bt || "")}</span>
+              </button>`
+            : ""
+        }
+        ${wide ? card(wide) : ""}
+        <p class="oc-ai"><span aria-hidden="true">‹‹‹</span> ${esc(story.aiLabel || "")} <span aria-hidden="true">›››</span></p>
+      </div>
+      <p class="seller-foot">${esc(state.config?.disclaimer || "")}</p>
+    </div>`;
+}
+
+function renderStoryPage(id) {
+  const story = state.oneCisco;
+  const page = story?.pages?.[id];
+  const meta = storyMeta(id);
+  if (!page || !meta) return renderStoryHome();
+  const groups = page.groups || [];
+  const ciscoOnly = page.ciscoOnly || [];
+  const hasBt = groups.length > 0;
+  const lens = !hasBt || state.storyLens === "cisco" ? "cisco" : "bt";
+  const groupHtml = groups
+    .map((g) => {
+      const family = state.families.find((f) => f.id === g.family);
+      if (!family) return "";
+      const chips = (g.cisco || []).map(ciscoChip).join("");
+      return `<article class="oc-group">
+        <button type="button" class="oc-bt-open" data-kind="family" data-id="${esc(family.id)}">${esc(family.name)}</button>
+        ${chips ? `<div class="oc-chips">${chips}</div>` : `<p class="oc-group-note">BT offer. No separate Cisco family.</p>`}
+      </article>`;
+    })
+    .join("");
+  const ciscoHtml = [...groups.flatMap((g) => g.cisco || []), ...ciscoOnly].map(ciscoChip).join("");
+  const note = !hasBt
+    ? `<p class="oc-note">BT International does not package this pillar. These families open on the Portfolio Navigator.</p>`
+    : "";
+  return `
+    <div class="seller-wrap oc-segue">
+      ${sellerTrail()}
+      <p class="hood-kicker">One Cisco</p>
+      <h1>${esc(meta.label)}</h1>
+      ${meta.promise ? `<p class="seller-line">${esc(meta.promise)}</p>` : ""}
+      ${meta.bt ? `<p class="oc-segue-bt">BT represents this as ${esc(meta.bt)}.</p>` : note}
+      ${
+        hasBt
+          ? `<div class="oc-lens" role="group" aria-label="How to read this pillar">
+              <button type="button" class="oc-lens-btn${lens === "bt" ? " on" : ""}" data-lens="bt">BT groups</button>
+              <button type="button" class="oc-lens-btn${lens === "cisco" ? " on" : ""}" data-lens="cisco">Cisco families</button>
+            </div>`
+          : ""
+      }
+      ${lens === "bt" ? `<div class="oc-groups">${groupHtml}</div>` : `<div class="oc-chips oc-chips-solo">${ciscoHtml}</div>`}
+      ${ciscoOnly.length && lens === "bt" ? `<h2>Cisco only</h2><p class="oc-note">These stay on the Portfolio Navigator. BT does not rename them.</p><div class="oc-chips">${ciscoOnly.map(ciscoChip).join("")}</div>` : ""}
+    </div>`;
 }
 
 function renderSellerHome() {

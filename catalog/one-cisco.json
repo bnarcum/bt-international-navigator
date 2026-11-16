@@ -1,0 +1,97 @@
+{
+  "navigator": "https://bnarcum.github.io/cisco-portfolio-navigator/",
+  "headline": "Cisco powers how people and technology work together across the physical and digital worlds",
+  "aiLabel": "Accelerated by Cisco AI",
+  "cards": [
+    {
+      "id": "ai-dc",
+      "place": "top",
+      "tone": "ai",
+      "label": "AI-Ready Data Centers",
+      "promise": "Power every workload securely, anywhere they run",
+      "bt": ""
+    },
+    {
+      "id": "workplaces",
+      "place": "top",
+      "tone": "wp",
+      "label": "Future-Proofed Workplaces",
+      "promise": "Empower and secure every worker, anywhere work happens",
+      "bt": "Voice, Webex, and UC Edge"
+    },
+    {
+      "id": "resilience",
+      "place": "wide",
+      "tone": "res",
+      "label": "Digital Resilience",
+      "promise": "Stay securely up and running when facing escalating disruptions",
+      "bt": "Ops Fabric"
+    }
+  ],
+  "bridge": {
+    "id": "connectivity",
+    "label": "Secure global connectivity",
+    "bt": "Global Fabric, SD-WAN, and SASE"
+  },
+  "pages": {
+    "ai-dc": {
+      "groups": [],
+      "ciscoOnly": [
+        { "id": "nexus", "name": "Cisco Nexus Switches" },
+        { "id": "aci", "name": "Cisco ACI" },
+        { "id": "nexus-dashboard", "name": "Cisco Nexus Dashboard" },
+        { "id": "nexus-one", "name": "Cisco Nexus One" },
+        { "id": "silicon-one", "name": "Cisco Silicon One" },
+        { "id": "ucs", "name": "Cisco UCS Servers" },
+        { "id": "hyperflex", "name": "Cisco HyperFlex" },
+        { "id": "intersight", "name": "Cisco Intersight" }
+      ]
+    },
+    "workplaces": {
+      "groups": [
+        { "family": "global-voice", "cisco": [{ "id": "webex-calling", "name": "Webex Calling" }] },
+        { "family": "webex-meetings", "cisco": [{ "id": "webex-meetings", "name": "Webex Meetings" }] },
+        { "family": "cisco-collaboration", "cisco": [{ "id": "webex-app", "name": "Webex App" }] },
+        { "family": "uc-edge", "cisco": [{ "id": "unified-cm", "name": "Cisco Unified Communications Manager" }] },
+        { "family": "one-cloud-cisco", "cisco": [] },
+        {
+          "family": "collab-devices",
+          "cisco": [
+            { "id": "room-systems", "name": "Cisco Room Systems" },
+            { "id": "desk-devices", "name": "Cisco Desk Devices" },
+            { "id": "ip-phones", "name": "Cisco IP Phones" },
+            { "id": "conf-phones", "name": "Cisco Conference Phones" },
+            { "id": "cisco-headsets", "name": "Cisco Headsets" }
+          ]
+        }
+      ],
+      "ciscoOnly": []
+    },
+    "resilience": {
+      "groups": [
+        { "family": "ops-fabric", "cisco": [] }
+      ],
+      "ciscoOnly": [
+        { "id": "duo", "name": "Cisco Duo" },
+        { "id": "umbrella", "name": "Cisco Umbrella" },
+        { "id": "ise", "name": "Cisco ISE" }
+      ]
+    },
+    "connectivity": {
+      "groups": [
+        { "family": "global-fabric", "cisco": [] },
+        { "family": "dia", "cisco": [] },
+        { "family": "icr", "cisco": [] },
+        {
+          "family": "sdwan",
+          "cisco": [
+            { "id": "sdwan", "name": "Cisco SD-WAN" },
+            { "id": "meraki-mx", "name": "Meraki MX" }
+          ]
+        },
+        { "family": "sase", "cisco": [{ "id": "secure-access", "name": "Cisco Secure Access" }] }
+      ],
+      "ciscoOnly": []
+    }
+  }
+}
