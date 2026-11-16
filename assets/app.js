@@ -1,4 +1,4 @@
-import { createGraph } from "./graph.js?v=0.2.16";
+import { createGraph } from "./graph.js?v=0.2.17";
 import { createPanel } from "./panel.js";
 import { createSolutionsApi } from "./solutions.js";
 import { createSolutionsUI } from "./solutions-ui.js";
@@ -14,8 +14,8 @@ import {
   oemProductsOn,
   productsOn,
   renderEdge,
-} from "./hood.js?v=0.2.16";
-import { markSvg } from "./marks.js?v=0.2.16";
+} from "./hood.js?v=0.2.17";
+import { markSvg } from "./marks.js?v=0.2.17";
 
 const BUILD = "0.1.0";
 
@@ -894,10 +894,21 @@ function ciscoChip(item) {
 
 function storyMarks() {
   return {
-    ai: `<svg class="oc-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3h8v4H8zM4 9h16v10H4zM9 13h2M13 13h2M9 16h6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>`,
-    wp: `<svg class="oc-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 15.5 12 4l8 11.5H4zM8 19h8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>`,
-    res: `<svg class="oc-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 5 6v6c0 4.2 2.8 6.8 7 8 4.2-1.2 7-3.8 7-8V6l-7-3z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>`,
+    ai: `<svg viewBox="0 0 48 48" aria-hidden="true"><path fill="currentColor" d="M18 6h2v4h-2zm6 0h2v4h-2zm6 0h2v4h-2zM18 38h2v4h-2zm6 0h2v4h-2zm6 0h2v4h-2zM6 18h4v2H6zm0 6h4v2H6zm0 6h4v2H6zM38 18h4v2h-4zm0 6h4v2h-4zm0 6h4v2h-4z"/><rect x="14" y="14" width="20" height="20" rx="3" fill="none" stroke="currentColor" stroke-width="2.4"/><rect x="19" y="19" width="10" height="10" rx="1.5" fill="currentColor"/></svg>`,
+    wp: `<svg viewBox="0 0 48 48" aria-hidden="true"><path fill="currentColor" d="M8 30.5 24 8l16 22.5H8zm6.2 3.5h19.6v3.2H14.2z"/><path fill="#041018" d="M20 24h8v4h-8z"/></svg>`,
+    res: `<svg viewBox="0 0 48 48" aria-hidden="true"><path fill="currentColor" d="M24 4 8 10.5V24c0 9.2 6.4 15.2 16 18.2 9.6-3 16-9 16-18.2V10.5L24 4zm0 8.2 9.2 3.6V24c0 5.6-3.6 9.4-9.2 11.4-5.6-2-9.2-5.8-9.2-11.4V15.8L24 12.2z"/></svg>`,
   };
+}
+
+function deckBar(card, marks) {
+  return `
+    <div class="deck-slot${card.place === "wide" ? " deck-slot-wide" : ""}">
+      <button type="button" class="deck-bar deck-${esc(card.tone)}${card.place === "wide" ? " deck-wide" : ""}" data-kind="story" data-id="${esc(card.id)}">
+        <span class="deck-ico">${marks[card.tone] || ""}</span>
+        <span class="deck-name">${esc(card.label)}</span>
+      </button>
+      <p class="deck-bt">${esc(card.bt || "Cisco families")}</p>
+    </div>`;
 }
 
 function renderStoryHome() {
@@ -906,32 +917,30 @@ function renderStoryHome() {
   const marks = storyMarks();
   const tops = (story.cards || []).filter((c) => c.place === "top");
   const wide = (story.cards || []).find((c) => c.place === "wide");
-  const card = (c) => `
-    <button type="button" class="oc-card oc-${esc(c.tone)}" data-kind="story" data-id="${esc(c.id)}">
-      <span class="oc-ico-wrap">${marks[c.tone] || ""}</span>
-      <span class="oc-card-copy">
-        <span class="oc-name">${esc(c.label)}</span>
-        ${c.bt ? `<span class="oc-bt">${esc(c.bt)}</span>` : `<span class="oc-bt oc-bt-quiet">Cisco portfolio</span>`}
-      </span>
-    </button>`;
   const bridge = story.bridge;
   return `
-    <div class="seller-wrap oc-home">
-      <p class="oc-headline">${esc(story.headline || "")}</p>
-      <div class="oc-stage">
-        <div class="oc-top">${tops.map(card).join("")}</div>
+    <div class="deck-home">
+      <p class="deck-headline">${esc(story.headline || "")}</p>
+      <div class="deck-board">
+        <div class="deck-top">${tops.map((c) => deckBar(c, marks)).join("")}</div>
         ${
           bridge
-            ? `<button type="button" class="oc-bridge" data-kind="story" data-id="${esc(bridge.id)}">
-                <span class="oc-bridge-line"><span aria-hidden="true">←</span><span>${esc(bridge.label)}</span><span aria-hidden="true">→</span></span>
-                <span class="oc-bt">${esc(bridge.bt || "")}</span>
-              </button>`
+            ? `<button type="button" class="deck-rule" data-kind="story" data-id="${esc(bridge.id)}">
+                <span class="deck-arrow" aria-hidden="true"></span>
+                <span class="deck-rule-label">${esc(bridge.label)}</span>
+                <span class="deck-arrow deck-arrow-r" aria-hidden="true"></span>
+              </button>
+              <p class="deck-bt deck-bt-mid">${esc(bridge.bt || "")}</p>`
             : ""
         }
-        ${wide ? card(wide) : ""}
-        <p class="oc-ai"><span aria-hidden="true">‹‹‹</span> ${esc(story.aiLabel || "")} <span aria-hidden="true">›››</span></p>
+        ${wide ? deckBar(wide, marks) : ""}
+        <p class="deck-accel">
+          <span class="deck-chevs" aria-hidden="true"><i></i><i></i><i></i></span>
+          ${esc(story.aiLabel || "")}
+          <span class="deck-chevs deck-chevs-r" aria-hidden="true"><i></i><i></i><i></i></span>
+        </p>
       </div>
-      <p class="seller-foot">${esc(state.config?.disclaimer || "")}</p>
+      <p class="deck-foot">${esc(state.config?.disclaimer || "")}</p>
     </div>`;
 }
 

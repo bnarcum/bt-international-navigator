@@ -1456,58 +1456,126 @@ button.arch-node, button.partner { cursor: pointer; }
   .proof-stats { grid-template-columns: 1fr 1fr; }
 }
 
-.oc-home, .oc-segue { position: relative; z-index: 1; max-width: 920px; }
-.oc-headline {
-  max-width: 40rem;
-  margin: 12px auto 28px;
-  text-align: center;
-  color: #d1d1d6;
-  font-size: 18px;
-  line-height: 1.4;
+.deck-home {
+  position: relative;
+  z-index: 1;
+  min-height: calc(100vh - var(--topbar-h));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: min(860px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 28px 0 36px;
 }
-.oc-stage { display: flex; flex-direction: column; align-items: stretch; gap: 14px; }
-.oc-top { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-.oc-card, .oc-bridge {
+.deck-headline {
+  max-width: 38rem;
+  margin: 0 0 28px;
+  text-align: center;
+  color: #f4fbff;
+  font-size: 20px;
+  line-height: 1.35;
+  font-weight: 500;
+}
+.deck-board {
+  position: relative;
+  width: min(736px, 100%);
+  padding: 26px 22px 8px;
+}
+.deck-board::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 14px;
+  background: rgba(1, 10, 24, 0.68);
+  border: 1.25px solid rgba(2, 200, 255, 0.55);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
+  z-index: -1;
+}
+.deck-top { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.deck-slot { display: flex; flex-direction: column; align-items: center; }
+.deck-slot-wide { grid-column: 1 / -1; }
+.deck-bar {
+  width: 100%;
+  height: 68px;
   display: flex;
   align-items: center;
-  gap: 14px;
-  text-align: left;
+  justify-content: center;
+  gap: 16px;
+  padding: 0 16px;
   font: inherit;
-  color: #e8f6ff;
+  font-size: 18px;
+  font-weight: 700;
+  color: #7eeaff;
   background: rgba(2, 14, 32, 0.82);
-  border: 2px solid #02c8ff;
-  border-radius: 8px;
-  padding: 16px 18px;
+  border: 2.25px solid #02c8ff;
+  border-radius: 6px;
   cursor: pointer;
 }
-.oc-card.oc-ai { border-color: #0a60ff; }
-.oc-card.oc-wp { border-color: #2dce5c; }
-.oc-card.oc-res {
+.deck-wide { height: 68px; }
+.deck-res {
   border-color: transparent;
   background:
-    linear-gradient(rgba(2, 14, 32, 0.94), rgba(2, 14, 32, 0.94)) padding-box,
+    linear-gradient(rgba(2, 14, 32, 0.9), rgba(2, 14, 32, 0.9)) padding-box,
     linear-gradient(90deg, #02c8ff, #d946ef, #ff9000) border-box;
+  border-width: 2.75px;
 }
-.oc-card:hover, .oc-bridge:hover { transform: translateY(-2px); }
-.oc-ico-wrap {
-  width: 44px;
-  height: 44px;
-  flex: 0 0 auto;
+.deck-bar:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(2, 200, 255, 0.22); }
+.deck-ico { width: 44px; height: 44px; flex: 0 0 auto; display: grid; place-items: center; filter: drop-shadow(0 0 8px rgba(126, 234, 255, 0.55)); }
+.deck-ico svg { width: 44px; height: 44px; display: block; }
+.deck-name { letter-spacing: -0.02em; }
+.deck-bt { margin: 8px 0 0; text-align: center; color: #c7c7cc; font-size: 13px; font-weight: 600; }
+.deck-bt-mid { margin: -2px 0 10px; }
+.deck-rule {
+  width: 100%;
+  margin-top: 18px;
   display: grid;
-  place-items: center;
-  color: #7eeaff;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 14px;
+  padding: 0 6px;
+  background: none;
+  border: none;
+  color: #fff;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
 }
-.oc-card.oc-wp .oc-ico-wrap { color: #2dce5c; }
-.oc-card.oc-res .oc-ico-wrap { color: #ffb020; }
-.oc-ico { width: 32px; height: 32px; }
-.oc-card-copy { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
-.oc-name { font-size: 18px; font-weight: 700; letter-spacing: -0.02em; }
-.oc-bt { color: #c7c7cc; font-size: 13px; font-weight: 600; }
-.oc-bt-quiet { color: #8e8e93; font-weight: 500; }
-.oc-bridge { flex-direction: column; align-items: center; gap: 4px; border-style: dashed; background: transparent; }
-.oc-bridge-line { display: flex; align-items: center; gap: 12px; font-size: 15px; font-weight: 650; }
-.oc-ai { margin: 8px 0 0; text-align: center; color: #e8f6ff; font-weight: 650; letter-spacing: 0.01em; }
-.oc-ai span { color: #02c8ff; margin: 0 8px; letter-spacing: -0.12em; }
+.deck-arrow { height: 2px; background: #f0fbff; position: relative; }
+.deck-arrow::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-right: 7px solid #f0fbff;
+}
+.deck-arrow-r::before { left: auto; right: 0; border-right: 0; border-left: 7px solid #f0fbff; }
+.deck-rule:hover .deck-rule-label { color: #7eeaff; }
+.deck-accel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 22px 0 16px;
+  color: #e8f6ff;
+  font-size: 15px;
+  font-weight: 600;
+}
+.deck-chevs { display: inline-flex; gap: 1px; margin: 0 18px; color: #02c8ff; font-size: 18px; font-weight: 600; font-style: normal; }
+.deck-chevs i { font-style: normal; }
+.deck-chevs i::before { content: "‹"; }
+.deck-chevs i:nth-child(1) { opacity: 0.86; }
+.deck-chevs i:nth-child(2) { opacity: 0.62; }
+.deck-chevs i:nth-child(3) { opacity: 0.42; }
+.deck-chevs-r i::before { content: "›"; }
+.deck-chevs-r i:nth-child(1) { opacity: 0.42; }
+.deck-chevs-r i:nth-child(2) { opacity: 0.62; }
+.deck-chevs-r i:nth-child(3) { opacity: 0.86; }
+.deck-foot { margin-top: 22px; color: #6e6e73; font-size: 12px; text-align: center; }
+.oc-segue { position: relative; z-index: 1; max-width: 920px; }
 .oc-segue-bt { color: #d1d1d6; font-size: 17px; margin-top: -6px; }
 .oc-note { color: #aeaeb2; max-width: 40rem; }
 .oc-lens { display: flex; gap: 8px; margin: 18px 0; }
@@ -1555,6 +1623,7 @@ button.arch-node, button.partner { cursor: pointer; }
 .oc-host { color: #8e8e93; font-size: 12px; }
 .oc-host::after { content: " ↗"; color: #7eeaff; }
 @media (max-width: 720px) {
-  .oc-top { grid-template-columns: 1fr; }
-  .oc-name { font-size: 16px; }
+  .deck-top { grid-template-columns: 1fr; }
+  .deck-bar { height: auto; min-height: 68px; font-size: 16px; }
+  .deck-headline { font-size: 17px; }
 }
